@@ -1,8 +1,8 @@
 " Random ------------------------------------------------------------------ {{{
+set nocompatible                                           " Use vim instead of vi defaults
 set encoding=utf-8                                         " Encoding to 32bit UTF-8 Unicode
 set showmode                                               " Show --INSERT-- etc mode when in one
 set ruler                                                  " Show where in the document we are
-set nocompatible                                           " Use vim instead of vi defaults
 set backspace=indent,eol,start                             " Allow backspacing over everything in insert mode
 set number                                                 " Print line numbers
 set cursorline                                             " Highlight the line where our cursor is
