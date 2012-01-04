@@ -26,4 +26,10 @@ set shiftwidth=2                                           " Change tabwidth to 
 set softtabstop=2                                          " Optional inbetween tabs
 set noexpandtab                                            " Don't turn tabs into spaces
 set wrap                                                   " Wraps display, NOT BUFFER
+
+" For Python, we want 4 spaces instead of tabs
+if has("autocmd")
+	filetype plugin indent on
+	autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+endif
 " }}}
