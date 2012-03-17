@@ -27,9 +27,11 @@ set softtabstop=2                                          " Optional inbetween 
 set noexpandtab                                            " Don't turn tabs into spaces
 set wrap                                                   " Wraps display, NOT BUFFER
 
-" For Python, we want 4 spaces instead of tabs
 if has("autocmd")
+	" For Python, we want 4 spaces instead of tabs
 	filetype plugin indent on
 	autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+	" For STK tinkering, we use the project's defaults
+	autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
 endif
 " }}}
