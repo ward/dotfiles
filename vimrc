@@ -12,6 +12,9 @@ set mouse=a                                                " Enable mouse for di
 set title                                                  " Let vim set the window title
 set laststatus=2                                           " Always show status line
 set ttyfast                                                " Indicates the terminal is fast and more chars can be sent
+
+set tags=./tags;/                                          " For use with ctags, looks for tags file in current folder
+                                                           " and if not found, works its way up till it does
 " }}}
 
 " Syntax Highlighting ----------------------------------------------------- {{{
