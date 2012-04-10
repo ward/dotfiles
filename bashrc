@@ -11,3 +11,6 @@ PS1='[\u@\h \W]\$ '
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias more='less'
+
+# Make sure we don't have to do this every time we use SVN
+export SVN_EDITOR=vim
