@@ -16,6 +16,8 @@ fi
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias more='less'
+# Redirect to stdout, cut between :  and <
+alias myip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\  -f 2 | cut -d\< -f 1'
 
 # usage: remindme <time> <text>
 # e.g.: remindme 10m "omg, the pizza"
