@@ -5,6 +5,7 @@
 # ./makeissue.sh > /etc/issue
 # Overwrites /etc/issue with this more colourful version
 # /etc/issue appears in tty consoles (for one)
+# See `man agetty` for escape sequences
 
 echo -e '\e[H\e[2J'
 echo
