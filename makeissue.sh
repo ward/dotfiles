@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# Usage:
+# Run as root
+# ./makeissue.sh > /etc/issue
+# Overwrites /etc/issue with this more colourful version
+# /etc/issue appears in tty consoles (for one)
+
 echo -e '\e[H\e[2J'
 echo
 echo
