@@ -5,7 +5,7 @@ set showmode                                               " Show --INSERT-- etc
 set ruler                                                  " Show where in the document we are
 set backspace=indent,eol,start                             " Allow backspacing over everything in insert mode
 set number                                                 " Print line numbers
-set cursorline                                             " Highlight the line where our cursor is
+set nocursorline                                           " Don't highlight the line where our cursor is
 set ignorecase                                             " Ignore case when searching
 set mouse=a                                                " Enable mouse for different modes
                                                            " (Normal, Visual, Insert, Commandline, All)
