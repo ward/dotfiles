@@ -48,6 +48,18 @@ extract () {
 	fi
 }
 
+function random()
+{
+	if [ -z "$1" ]
+	then
+		echo $RANDOM
+	else
+		number=$RANDOM
+		let "number %= $1"
+		echo $number
+	fi
+}
+
 
 export EDITOR=vim
 # Make sure we don't have to do this every time we use SVN
