@@ -1,0 +1,8 @@
+/*
+ * Move sidebar to the right
+ */
+
+#browser {
+    -moz-box-direction: reverse;
+}
+

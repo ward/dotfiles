@@ -1,0 +1,32 @@
+/* Note that for every change, Firefox needs to be restarted. */
+
+/* Dark theme screws up input/textarea colours because of lazy webprogrammers */
+input {
+	-moz-appearance: none !important;
+	background-color: white;
+	color: black;
+}
+
+textarea {
+	-moz-appearance: none !important;
+	background-color: white;
+	color: black;
+}
+
+@-moz-document domain(eztv.it) {
+	* {
+		font-family: Ubuntu, sans-serif !important;
+	}
+	#header_logo {
+		display: none;
+	}
+}
+
+@-moz-document domain(ycombinator.com) {
+	* {
+		font-family: Ubuntu, sans-serif !important;
+	}
+	input, textarea {
+		font-family: "Ubuntu Mono" !important;
+	}
+}
