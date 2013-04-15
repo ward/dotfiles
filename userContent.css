@@ -29,4 +29,14 @@ textarea {
 	input, textarea {
 		font-family: "Ubuntu Mono" !important;
 	}
+	span.comment font {
+		width: 30em;
+		display: block;
+	}
+}
+
+@-moz-document domain(reddit.com) {
+	div.md {
+		max-width: 30em !important;
+	}
 }
