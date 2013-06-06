@@ -168,4 +168,4 @@ assign [class="SuperTuxKart"] → 6
 #for_window [class="SuperTuxKart"] resize shrink right 100px;
 
 # Set a background with `feh`
-exec --no-startup-id feh --bg-scale "/home/ward/Dropbox/bg/road_setting_sun.jpg"
+exec --no-startup-id feh --bg-scale "/home/ward/Dropbox/bg/clouds.jpg"
