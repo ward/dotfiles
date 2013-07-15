@@ -161,6 +161,9 @@ bindsym XF86AudioRaiseVolume exec amixer sset Master 10%+ unmute
 bindsym XF86AudioLowerVolume exec amixer sset Master 10%- unmute
 bindsym XF86AudioMute exec amixer sset Master toggle
 
+# Take a screenshot
+bindsym Print exec scrot
+
 assign [class="SuperTuxKart"] → 6
 # Not the desired effect
 #for_window [class="SuperTuxKart"] floating enable;
