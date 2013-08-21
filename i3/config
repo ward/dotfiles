@@ -27,7 +27,7 @@ bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec i3-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -159,3 +159,7 @@ assign [class="SuperTuxKart"] → 6
 
 # Set a background with `feh`
 exec --no-startup-id feh --bg-scale "/home/ward/Dropbox/bg/clouds.jpg"
+
+# Set correct variant of the keyboard (aka the one that I want)
+# Is there no better (more official) way to do this?
+exec --no-startup-id setxkbmap us -variant altgr-intl
