@@ -132,6 +132,9 @@ bindsym XF86AudioMute exec amixer sset Master toggle
 # Take a screenshot
 bindsym Print exec scrot
 
+# Lock the screen (on Acer Aspire 5671 this is the P button)
+bindsym XF86Launch2 exec /home/ward/bin/lockscreen.sh
+
 assign [class="SuperTuxKart"] → 6
 # Not the desired effect
 #for_window [class="SuperTuxKart"] floating enable;
