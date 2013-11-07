@@ -134,7 +134,7 @@ bindsym XF86AudioMute exec amixer sset Master toggle
 bindsym Print exec scrot
 
 # Lock the screen (on Acer Aspire 5671 this is the P button)
-bindsym XF86Launch2 exec /home/ward/.dotfiles/i3/lockscreen.sh
+bindsym XF86Launch2 exec /home/ward/.dotfiles/i3/blurredlock.sh
 
 # Start Aurora (Firefox + 2)
 bindsym XF86HomePage exec /opt/firefox/firefox
