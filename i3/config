@@ -137,7 +137,7 @@ bindsym Print exec scrot
 bindsym XF86Launch2 exec /home/ward/.dotfiles/i3/blurredlock.sh
 
 # Start Aurora (Firefox + 2)
-bindsym XF86HomePage exec /opt/firefox/firefox
+bindsym XF86WWW exec /opt/firefox/firefox
 
 assign [class="SuperTuxKart"] → 6
 # Not the desired effect
