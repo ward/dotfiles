@@ -19,8 +19,8 @@ set tags=./tags;/                                          " For use with ctags,
 
 " Syntax Highlighting ----------------------------------------------------- {{{
 syntax on
-set background=dark
-colorscheme darkblue                                       " Find schemes in /usr/share/vim/vim73/colors/
+"set background=dark
+"colorscheme darkblue                                       " Find schemes in /usr/share/vim/vim73/colors/
 " }}}
 
 " Tabs, spacing, wrapping ------------------------------------------------- {{{
@@ -36,5 +36,9 @@ if has("autocmd")
 	autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
 	" For STK tinkering, we use the project's defaults
 	autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
+	" cd.net project defaults
+	autocmd BufNewFile,BufRead ~/sep/cd/repo/* setlocal expandtab shiftwidth=2 softtabstop=2
+	" My only .md files are markdown
+	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 endif
 " }}}
