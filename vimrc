@@ -13,8 +13,6 @@ set backspace=indent,eol,start
 set number
 " Don't highlight the line where our cursor is
 set nocursorline
-" Ignore case when searching
-set ignorecase
 " Enable mouse for different modes
 " (Normal, Visual, Insert, Commandline, All)
 set mouse=a
@@ -29,6 +27,15 @@ set ttyfast
 " and if not found, works its way up till it does
 set tags=./tags;/
 
+" }}}
+
+" Search ------------------------------------------------------------------ {{{
+" Ignore case when searching
+set ignorecase
+" But do it intelligently (case sensitive if the search has uppercase chars)
+set smartcase
+" Start searching as you type
+set incsearch
 " }}}
 
 " Syntax Highlighting ----------------------------------------------------- {{{
