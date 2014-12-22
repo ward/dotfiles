@@ -30,6 +30,11 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# Digraphs
+autoload insert-composed-char
+zle -N insert-composed-char
+bindkey ^K insert-composed-char
+
 # Load the default .profile
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
 
