@@ -53,3 +53,14 @@ textarea {
 		max-width: 30em !important;
 	}
 }
+/* /r/thebutton, always show flair text */
+@-moz-document regexp(".*reddit\.com\/r\/thebutton.*") { 
+  .flair {
+    max-width: 500px !important;
+    padding: 0px 5px !important;
+    color: #ffffff !important;
+  }
+  .thebutton-container {
+    max-height: 60px;
+  }
+}
