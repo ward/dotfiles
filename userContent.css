@@ -1,5 +1,18 @@
 /* Note that for every change, Firefox needs to be restarted. */
 
+/* Replace font with another. Due to some terrible font matching done in
+ * Firefox, it does not use the correct serif fallback font. So instead force
+ * some to use my fallback explicitly.
+ */
+@font-face {
+  font-family: 'Liberation Serif';
+  src: local('Charis SIL');
+}
+@font-face {
+  font-family: Georgia;
+  src: local('Charis SIL');
+}
+
 /* Dark theme screws up input/textarea colours because of lazy webprogrammers */
 input {
 	-moz-appearance: none !important;
