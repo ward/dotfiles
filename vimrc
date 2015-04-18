@@ -23,6 +23,9 @@ set laststatus=2
 " Indicates the terminal is fast and more chars can be sent
 set ttyfast
 
+" Let :w!! gain sudo privileges without closing and reopening vim
+command Sudow w !sudo tee % >/dev/null
+
 " For use with ctags, looks for tags file in current folder
 " and if not found, works its way up till it does
 set tags=./tags;/
