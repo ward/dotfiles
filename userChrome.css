@@ -1,8 +1,3 @@
-/*
- * Move sidebar to the right
- */
-
-#browser {
-    -moz-box-direction: reverse;
+menuitem[label="Save Page to Pocket"] {
+  display: none !important;
 }
-
