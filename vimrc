@@ -32,6 +32,20 @@ set tags=./tags;/
 
 " }}}
 
+" Leader stuff ------------------------------------------------------------ {{{
+" Set space as the leader
+let mapleader = "\<Space>"
+" Copy/pasting to system clipboard with <Leader>copy stuff.
+" (note on Ubuntu need vim-gnome for interaction with system clipboard, not
+" regular vim)
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+" }}}
+
 " Search ------------------------------------------------------------------ {{{
 " Ignore case when searching
 set ignorecase
