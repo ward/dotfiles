@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Radio 1 nieuws
+Comment=Meest recente radio 1 nieuws - via radioplus
+Exec=vlc http://od.mp3.streampower.be/vrt/radio1/11_11niws-snip_hi.mp3
+Icon=audio-player
+Terminal=false
+StartupNotify=false

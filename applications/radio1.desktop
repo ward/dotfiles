@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Radio 1
+Comment=Radio 1 in vlc
+Exec=vlc http://mp3.streampower.be/radio1-high.mp3
+Icon=audio-player
+Terminal=false
+StartupNotify=false
