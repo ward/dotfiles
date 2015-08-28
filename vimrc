@@ -86,5 +86,7 @@ if has("autocmd")
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
   " Enable spellcheck when writing in latex
   autocmd FileType tex setlocal spell spelllang=en_gb
+  " and markdown
+  autocmd FileType markdown setlocal spell spelllang=en_gb
 endif
 " }}}
