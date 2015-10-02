@@ -346,6 +346,26 @@
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>0</x><y>-0</y><width>100%</width><height>50%</height></action>
     </keybind>
+    <keybind key="W-u"> # UpperLeft
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>0</x><y>0</y><height>50%</height><width>50%</width></action>
+    </keybind>
+    <keybind key="W-o"> # UpperRight
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>-0</x><y>0</y><height>50%</height><width>50%</width></action>
+    </keybind>
+    <keybind key="W-m"> # LowerLeft
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>0</x><y>-0</y><height>50%</height><width>50%</width></action>
+    </keybind>
+    <keybind key="W-period"> # UpperRight
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>-0</x><y>-0</y><height>50%</height><width>50%</width></action>
+    </keybind>
+    <keybind key="W-k"> # Center
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>25%</x><y>25%</y><height>50%</height><width>50%</width></action>
+    </keybind>
     <!-- Keybindings for running applications on Home + E -->
     <keybind key="W-f">
       <action name="Execute">
