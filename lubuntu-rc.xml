@@ -120,7 +120,7 @@
 
        use obconf if you want to change these without having to log out
        and back in -->
-    <number>2</number>
+    <number>4</number>
     <firstdesk>1</firstdesk>
     <names>
       <!-- set names up here if you want to, like this:
@@ -696,6 +696,9 @@
       </mousebind>
       <mousebind button="Left" action="Click">
         <action name="ToggleOmnipresent"/>
+      </mousebind>
+      <mousebind button="Right" action="Click">
+        <action name="ToggleAlwaysOnTop"/>
       </mousebind>
     </context>
     <context name="Shade">
