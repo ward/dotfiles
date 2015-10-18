@@ -495,6 +495,11 @@
         <command>lxsession-default file_manager</command>
       </action>
     </keybind>
+    <keybind key="XF86HomePage">
+      <action name="Execute">
+        <command>lxsession-default webbrowser</command>
+      </action>
+    </keybind>
     <!-- Keybindings for Multimedia Keys and LCD Backlight (alternative when not using gnome-power-manager or xfce4-volumed) -->
     <keybind key="C-F7">
       <action name="Execute">
