@@ -22,6 +22,8 @@ set title
 set laststatus=2
 " Indicates the terminal is fast and more chars can be sent
 set ttyfast
+" Visual autocomplete for command menu
+set wildmenu
 
 " Let :w!! gain sudo privileges without closing and reopening vim
 command Sudow w !sudo tee % >/dev/null
