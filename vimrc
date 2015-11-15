@@ -1,3 +1,27 @@
+" Vundle ------------------------------------------------------------------ {{{
+" Use vim instead of vi defaults (required)
+set nocompatible
+" (required)
+filetype off
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Use this area to specify plugins you want to use
+
+Plugin 'kien/ctrlp.vim'
+" Change keyboard for ctrlp to leader o
+let g:ctrlp_map = '<Leader>o'
+
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'tpope/vim-rails'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" }}}
+
+
 " Random ------------------------------------------------------------------ {{{
 " Use vim instead of vi defaults
 set nocompatible
