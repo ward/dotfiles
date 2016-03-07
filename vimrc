@@ -4,6 +4,7 @@ set nocompatible
 " (required)
 filetype off
 " set the runtime path to include Vundle and initialize
+" (need to have downloaded Vundle in that folder)
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -48,9 +49,8 @@ set laststatus=2
 set ttyfast
 " Visual autocomplete for command menu
 set wildmenu
-
-" Let :w!! gain sudo privileges without closing and reopening vim
-command Sudow w !sudo tee % >/dev/null
+" Ignore node_modules folder (also covers ctrlp plugin)
+set wildignore+=node_modules
 
 " For use with ctags, looks for tags file in current folder
 " and if not found, works its way up till it does
@@ -114,5 +114,6 @@ if has("autocmd")
   autocmd FileType tex setlocal spell spelllang=en_gb
   " and markdown
   autocmd FileType markdown setlocal spell spelllang=en_gb
+  autocmd FileType markdown setlocal autoindent
 endif
 " }}}
