@@ -18,6 +18,11 @@ Plugin 'scrooloose/nerdtree'
 
 Plugin 'tpope/vim-rails'
 
+Plugin 'airblade/vim-gitgutter'
+
+Plugin 'vim-airline/vim-airline'
+let g:airline_powerline_fonts = 1
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " }}}
