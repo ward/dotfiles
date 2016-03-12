@@ -27,7 +27,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " }}}
 
-
 " Random ------------------------------------------------------------------ {{{
 " Use vim instead of vi defaults
 set nocompatible
@@ -64,7 +63,7 @@ set tags=./tags;/
 " }}}
 
 " Leader stuff ------------------------------------------------------------ {{{
-" Set space as the leader
+" Set space as the leader (should maybe be done earlier in the file? TODO)
 let mapleader = "\<Space>"
 " Copy/pasting to system clipboard with <Leader>copy stuff.
 " (note on Ubuntu need vim-gnome for interaction with system clipboard, not
@@ -75,6 +74,8 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+" Toggle NERDTree (better place to put this?)
+nmap <Leader>t :NERDTreeToggle<CR>
 " }}}
 
 " Search ------------------------------------------------------------------ {{{
