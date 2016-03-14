@@ -1,5 +1,5 @@
 # Global upload and download rate in KiB. "0" for unlimited.
-download_rate = 0
+download_rate = 500
 upload_rate = 30
 
 # Maximum number of simultaneous downloads
@@ -7,12 +7,18 @@ max_downloads_global = 3
 # Maximum number of simultaneous uploads
 max_uploads_global = 5
 
+# Check hash when download complete or on rtorrent start
+check_hash = yes
+
+# Try, but do not force, encryption
+encryption = allow_incoming,try_outgoing,enable_retry
+
 # The directory option will determine where your torrent data will be saved
-directory = ~/dll/rtorrent/downloads
+directory = ~/rtorrent/downloads
 
 # The session option allows rTorrent to save the progess of your torrents
-session = ~/.local/share/rtorrent
+session = ~/rtorrent/session
 
 # Syntax: id (your choice), starttime, intervaltime, command to execute
 # This one loads files from the watched folder.
-schedule = watch_directory,10,600,load_start=~/dll/rtorrent/watch/*.torrent
+schedule = watch_directory,10,600,load_start=~/rtorrent/watch/*.torrent
