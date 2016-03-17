@@ -56,6 +56,12 @@ set wildmenu
 " Ignore node_modules folder (also covers ctrlp plugin)
 set wildignore+=node_modules
 
+" Disable arrow keys (except for insert mode)
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
 " For use with ctags, looks for tags file in current folder
 " and if not found, works its way up till it does
 set tags=./tags;/
@@ -107,15 +113,15 @@ set expandtab
 set wrap
 
 if has("autocmd")
-	" For Python, we want 4 spaces instead of tabs
-	filetype plugin indent on
-	autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
-	" For STK tinkering, we use the project's defaults
-	autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
-	" cd.net project defaults
-	autocmd BufNewFile,BufRead ~/sep/cd/repo/* setlocal expandtab shiftwidth=2 softtabstop=2
-	" My only .md files are markdown
-	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+  " For Python, we want 4 spaces instead of tabs
+  filetype plugin indent on
+  autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+  " For STK tinkering, we use the project's defaults
+  autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
+  " cd.net project defaults
+  autocmd BufNewFile,BufRead ~/sep/cd/repo/* setlocal expandtab shiftwidth=2 softtabstop=2
+  " My only .md files are markdown
+  autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
   " Enable spellcheck when writing in latex
   autocmd FileType tex setlocal spell spelllang=en_gb
   " and markdown
