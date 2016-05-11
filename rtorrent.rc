@@ -13,6 +13,17 @@ check_hash = yes
 # Try, but do not force, encryption
 encryption = allow_incoming,try_outgoing,enable_retry
 
+# Enable default ratio group
+ratio.enable=
+
+# Set the limits
+# Max etc will not trigger unless this one has been met
+ratio.min.set=100
+# Stop at 200%
+ratio.max.set=200
+# Or if 500M has been uploaded
+ratio.upload.set=500M
+
 # The directory option will determine where your torrent data will be saved
 directory = ~/rtorrent/downloads
 
