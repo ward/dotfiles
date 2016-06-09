@@ -46,6 +46,8 @@ export PATH=$HOME/bin:$PATH
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
+export TERM=xterm-256color
+
 export EDITOR='vim'
 
 # Compilation flags
