@@ -55,6 +55,9 @@ set ttyfast
 set wildmenu
 " Ignore node_modules folder (also covers ctrlp plugin)
 set wildignore+=node_modules
+" Do not use Esc as possible start of key combo in insert mode, makes leaving
+" to normal mode happen immediately instead of taking 1s
+set noesckeys
 
 " Disable arrow keys (except for insert mode)
 map <up> <nop>
