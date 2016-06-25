@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Kanaal 2 livestream
+Comment=The main Kanaal 2 livestream (good for Champions League)
+Exec=vlc http://apple.event.stream.vmmacdn.be/geoblock_hls/hls.m3u8
+#Icon=
+#StartupWMClass=play.spotify.com__browse
+Categories=AudioVideo;Video;

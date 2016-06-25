@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=RTBF1 livestream
+Comment=RTBF1 livestream
+Exec=vlc http://rtbf-geo-live.hls.adaptive.level3.net/hls-live/rtbfgeo-launebembr/_definst_/live/stream5.m3u8
+#Icon=
+#StartupWMClass=play.spotify.com__browse
+Categories=AudioVideo;Video;
