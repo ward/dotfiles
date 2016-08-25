@@ -133,6 +133,8 @@ if has("autocmd")
   " and markdown
   autocmd FileType markdown setlocal spell spelllang=en_gb
   autocmd FileType markdown setlocal autoindent
+  autocmd FileType markdown setlocal makeprg=pandoc\ %\ -t\ latex\ --latex-engine=xelatex\ -o\ /tmp/%<.pdf
+  autocmd FileType markdown nmap <Leader>v :!open /tmp/%<.pdf<CR><CR>
   " Go files want spacing like gofmt
   autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=0
 endif
