@@ -10,7 +10,7 @@ call vundle#begin()
 
 " Use this area to specify plugins you want to use
 
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 " Change keyboard for ctrlp to leader o
 let g:ctrlp_map = '<Leader>o'
 
@@ -22,6 +22,11 @@ Plugin 'airblade/vim-gitgutter'
 
 Plugin 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
+
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_rust_src_path = '/Users/ward/prog/rustc-1.10.0/src'
+
+Plugin 'rust-lang/rust.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -40,8 +45,8 @@ set ruler
 set backspace=indent,eol,start
 " Print line numbers
 set number
-" Don't highlight the line where our cursor is
-set nocursorline
+" Highlight the line where our cursor is
+set cursorline
 " Enable mouse for different modes
 " (Normal, Visual, Insert, Commandline, All)
 set mouse=a
@@ -55,9 +60,7 @@ set ttyfast
 set wildmenu
 " Ignore node_modules folder (also covers ctrlp plugin)
 set wildignore+=node_modules
-" Do not use Esc as possible start of key combo in insert mode, makes leaving
-" to normal mode happen immediately instead of taking 1s
-set noesckeys
+set wildignore+=_site
 
 " Disable arrow keys (except for insert mode)
 map <up> <nop>
@@ -98,7 +101,7 @@ set incsearch
 
 " Syntax Highlighting ----------------------------------------------------- {{{
 syntax on
-"set background=dark
+set background=dark
 " Find schemes in /usr/share/vim/vim73/colors/
 "colorscheme darkblue
 " }}}
@@ -130,5 +133,7 @@ if has("autocmd")
   " and markdown
   autocmd FileType markdown setlocal spell spelllang=en_gb
   autocmd FileType markdown setlocal autoindent
+  " Go files want spacing like gofmt
+  autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=0
 endif
 " }}}
