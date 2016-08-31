@@ -27,6 +27,7 @@ Plugin 'Valloric/YouCompleteMe'
 let g:ycm_rust_src_path = '/Users/ward/prog/rustc-1.10.0/src'
 
 Plugin 'rust-lang/rust.vim'
+let g:rustfmt_autosave = 1
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -60,7 +61,10 @@ set ttyfast
 set wildmenu
 " Ignore node_modules folder (also covers ctrlp plugin)
 set wildignore+=node_modules
+" Ignore jekyll's target
 set wildignore+=_site
+" Ignore rust's target
+set wildignore+=target
 
 " Disable arrow keys (except for insert mode)
 map <up> <nop>

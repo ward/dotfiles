@@ -4,6 +4,7 @@
  * Firefox, it does not use the correct serif fallback font. So instead force
  * some to use my fallback explicitly.
  */
+/*
 @font-face {
   font-family: 'Liberation Serif';
   src: local('Charis SIL');
@@ -12,44 +13,29 @@
   font-family: Georgia;
   src: local('Charis SIL');
 }
+ */
 
 /* Dark theme screws up input/textarea colours because of lazy webprogrammers */
 input {
-	-moz-appearance: none !important;
-	background-color: white;
-	color: black;
+  -moz-appearance: none !important;
+  background-color: white;
+  color: black;
 }
 
 textarea {
-	-moz-appearance: none !important;
-	background-color: white;
-	color: black;
-}
-
-@-moz-document domain(eztv.it) {
-	* {
-		font-family: sans-serif !important;
-	}
-	#header_logo {
-		display: none;
-	}
+  -moz-appearance: none !important;
+  background-color: white;
+  color: black;
 }
 
 @-moz-document domain(ycombinator.com) {
-	* {
-		font-family: sans-serif !important;
-	}
-	input, textarea {
-		font-family: monospace !important;
-	}
-	span.comment {
-		width: 30em;
-		display: block;
-	}
+  div.comment {
+    width: 30em;
+  }
 }
 
 @-moz-document domain(reddit.com) {
-	div.md {
-		max-width: 30em !important;
-	}
+  div.md {
+    max-width: 30em !important;
+  }
 }
