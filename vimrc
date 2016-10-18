@@ -25,9 +25,11 @@ let g:airline_powerline_fonts = 1
 
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_rust_src_path = '/Users/ward/prog/rustc-1.10.0/src'
+let g:ycm_python_binary_path = 'python'
 
 Plugin 'rust-lang/rust.vim'
-let g:rustfmt_autosave = 1
+" Became hella slow?
+"let g:rustfmt_autosave = 1
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -76,6 +78,18 @@ map <right> <nop>
 " and if not found, works its way up till it does
 set tags=./tags;/
 
+" Via vim-sensible
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j " Delete comment character when joining commented lines
+endif
+
+" Via vim-sensible
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+" matchit makes % more useful visavis html tags etc
+" Plugin is included by default in vim
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
 " }}}
 
 " Leader stuff ------------------------------------------------------------ {{{
@@ -134,6 +148,7 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
   " Enable spellcheck when writing in latex
   autocmd FileType tex setlocal spell spelllang=en_gb
+  autocmd FileType tex setlocal makeprg=latexmk\ %<
   " and markdown
   autocmd FileType markdown setlocal spell spelllang=en_gb
   autocmd FileType markdown setlocal autoindent
