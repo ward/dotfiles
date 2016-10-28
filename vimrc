@@ -31,6 +31,11 @@ Plugin 'rust-lang/rust.vim'
 " Became hella slow?
 "let g:rustfmt_autosave = 1
 
+
+" Creates tags files in memory and uses it to display the structure of your
+" file
+Plugin 'majutsushi/tagbar'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " }}}
@@ -105,7 +110,8 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 " Toggle NERDTree (better place to put this?)
-nmap <Leader>t :NERDTreeToggle<CR>
+nmap <Leader>T :NERDTreeToggle<CR>
+nmap <Leader>t :TagbarToggle<CR>
 " }}}
 
 " Search ------------------------------------------------------------------ {{{
