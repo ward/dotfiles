@@ -26,6 +26,11 @@ let g:airline_powerline_fonts = 1
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_rust_src_path = '/Users/ward/prog/rustc-1.10.0/src'
 let g:ycm_python_binary_path = 'python'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" Note: semantic completion is never triggered automatically when at top level
+" since this would be too slow. If you do need semantic completion, use ^space
+" to trigger it. This is the YouCompleteMe command. You could use vim's omni-
+" complete directly (^x ^o), but adviced to go through YouCompleteMe instead.
 
 Plugin 'rust-lang/rust.vim'
 " Became hella slow?
