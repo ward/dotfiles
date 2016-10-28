@@ -140,6 +140,13 @@ if has("autocmd")
   " For Python, we want 4 spaces instead of tabs
   filetype plugin indent on
   autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+  " Run current file in a python shell while still keeping PYTHONSTARTUP info
+  " autocmd FileType python nmap <Leader>r :!cat $PYTHONSTARTUP % >%<.interactiverun.py && python -i %<.interactiverun.py && rm %<.interactiverun.py<CR>
+  " Even nicer to just use ipython! (pip install ipython required)
+  "autocmd FileType python nmap <Leader>r :!ipython -i %<CR>
+  " Disabling ipython and using idle instead for the time being. Minimize
+  " confusion of the students
+  autocmd FileType python nmap <Leader>r :!idle -r % &<CR><CR>
   " For STK tinkering, we use the project's defaults
   autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
   " cd.net project defaults
