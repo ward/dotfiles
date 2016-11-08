@@ -38,7 +38,8 @@ Plugin 'rust-lang/rust.vim'
 
 
 " Creates tags files in memory and uses it to display the structure of your
-" file
+" file. Note for LaTeX you will want to make sure you use ctags' HEAD version.
+" The stable version (5.8 released in 2009) sucks.
 Plugin 'majutsushi/tagbar'
 
 call vundle#end()            " required
@@ -167,6 +168,7 @@ if has("autocmd")
   " Enable spellcheck when writing in latex
   autocmd FileType tex setlocal spell spelllang=en_gb
   autocmd FileType tex setlocal makeprg=latexmk\ %<
+  autocmd FileType tex setlocal foldmethod=marker
   " and markdown
   autocmd FileType markdown setlocal spell spelllang=en_gb
   autocmd FileType markdown setlocal autoindent
