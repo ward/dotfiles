@@ -8,6 +8,9 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" required
+Plugin 'VundleVim/Vundle.vim'
+
 " Use this area to specify plugins you want to use
 
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -24,7 +27,9 @@ Plugin 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
 
 Plugin 'Valloric/YouCompleteMe'
-let g:ycm_rust_src_path = '/Users/ward/prog/rustc-1.10.0/src'
+" This is where rustup dumps the source. Can youcomplete me not do this
+" automatically?
+let g:ycm_rust_src_path = '/Users/ward/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
 let g:ycm_python_binary_path = 'python'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 " Note: semantic completion is never triggered automatically when at top level
@@ -33,9 +38,9 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " complete directly (^x ^o), but adviced to go through YouCompleteMe instead.
 
 Plugin 'rust-lang/rust.vim'
+let g:rust_fold = 1
 " Became hella slow?
 "let g:rustfmt_autosave = 1
-
 
 " Creates tags files in memory and uses it to display the structure of your
 " file. Note for LaTeX you will want to make sure you use ctags' HEAD version.
@@ -152,13 +157,10 @@ if has("autocmd")
   " For Python, we want 4 spaces instead of tabs
   filetype plugin indent on
   autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
-  " Run current file in a python shell while still keeping PYTHONSTARTUP info
-  " autocmd FileType python nmap <Leader>r :!cat $PYTHONSTARTUP % >%<.interactiverun.py && python -i %<.interactiverun.py && rm %<.interactiverun.py<CR>
   " Even nicer to just use ipython! (pip install ipython required)
-  "autocmd FileType python nmap <Leader>r :!ipython -i %<CR>
-  " Disabling ipython and using idle instead for the time being. Minimize
-  " confusion of the students
-  autocmd FileType python nmap <Leader>r :!idle -r % &<CR><CR>
+  autocmd FileType python nmap <Leader>r :!ipython -i %<CR>
+  " When teaching ICW, using idle is preferred
+  "autocmd FileType python nmap <Leader>r :!idle -r % &<CR><CR>
   " For STK tinkering, we use the project's defaults
   autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
   " cd.net project defaults
@@ -176,5 +178,7 @@ if has("autocmd")
   autocmd FileType markdown nmap <Leader>v :!open /tmp/%<.pdf<CR><CR>
   " Go files want spacing like gofmt
   autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=0
+  " Have make just run the current file if R
+  autocmd FileType r setlocal makeprg=R\ --no-save\ -q\ <%
 endif
 " }}}
