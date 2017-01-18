@@ -167,33 +167,53 @@ set softtabstop=2
 set expandtab
 " Wraps display, NOT BUFFER
 set wrap
+" }}}
 
 if has("autocmd")
-  " For Python, we want 4 spaces instead of tabs
   filetype plugin indent on
+  " Language specific settings -------------------------------------------- {{{
+  " Python ---------------------------------------------------------------- {{{
   autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
-  " Even nicer to just use ipython! (pip install ipython required)
+  " Run current file in ipython and give shell (pip install ipython required)
   autocmd FileType python nmap <Leader>r :!ipython -i %<CR>
   " When teaching ICW, using idle is preferred
   "autocmd FileType python nmap <Leader>r :!idle -r % &<CR><CR>
-  " For STK tinkering, we use the project's defaults
-  autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
-  " cd.net project defaults
-  autocmd BufNewFile,BufRead ~/sep/cd/repo/* setlocal expandtab shiftwidth=2 softtabstop=2
+  " }}}
+
+  " Markdown -------------------------------------------------------------- {{{
   " My only .md files are markdown
   autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
-  " Enable spellcheck when writing in latex
-  autocmd FileType tex setlocal spell spelllang=en_gb
-  autocmd FileType tex setlocal makeprg=latexmk\ %<
-  autocmd FileType tex setlocal foldmethod=marker
-  " and markdown
   autocmd FileType markdown setlocal spell spelllang=en_gb
   autocmd FileType markdown setlocal autoindent
   autocmd FileType markdown setlocal makeprg=pandoc\ %\ -t\ latex\ --latex-engine=xelatex\ -o\ /tmp/%<.pdf
   autocmd FileType markdown nmap <Leader>v :!open /tmp/%<.pdf<CR><CR>
-  " Go files want spacing like gofmt
+  " }}}
+
+  " Latex ----------------------------------------------------------------- {{{
+  " Enable spellcheck when writing in latex
+  autocmd FileType tex setlocal spell spelllang=en_gb
+  autocmd FileType tex setlocal makeprg=latexmk\ %<
+  autocmd FileType tex setlocal foldmethod=marker
+  " }}}
+
+  " Go -------------------------------------------------------------------- {{{
   autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=0
-  " Have make just run the current file if R
+  " }}}
+
+  " R --------------------------------------------------------------------- {{{
+  " Have make just run the current file
   autocmd FileType r setlocal makeprg=R\ --no-save\ -q\ <%
+  " }}}
+
+  " Vim ------------------------------------------------------------------- {{{
+  autocmd FileType vim setlocal foldmethod=marker
+  " }}}
+  " }}}
+  " Project specific settings --------------------------------------------- {{{
+  " Does this stuff really belong in a vimrc? (No)
+  " For STK tinkering, we use the project's defaults
+  autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
+  " cd.net project defaults
+  autocmd BufNewFile,BufRead ~/sep/cd/repo/* setlocal expandtab shiftwidth=2 softtabstop=2
+  " }}}
 endif
-" }}}
