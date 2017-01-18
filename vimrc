@@ -46,6 +46,21 @@ let g:rust_fold = 1
 " file. Note for LaTeX you will want to make sure you use ctags' HEAD version.
 " The stable version (5.8 released in 2009) sucks.
 Plugin 'majutsushi/tagbar'
+" Also requires "extending" ctags by adding the rust definitions (find in rust
+" repo) to a ~/.ctags file.
+let g:tagbar_type_rust = {
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits,traits',
+        \'i:impls,trait implementations',
+    \]
+    \}
 
 call vundle#end()            " required
 filetype plugin indent on    " required
