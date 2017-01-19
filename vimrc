@@ -60,7 +60,17 @@ let g:tagbar_type_rust = {
         \'t:traits,traits',
         \'i:impls,trait implementations',
     \]
-    \}
+\}
+" Using ctags definition via https://github.com/majutsushi/tagbar/issues/70
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:headings',
+        \ 'l:links',
+        \ 'i:images'
+    \ ],
+    \ "sort" : 0
+\ }
 
 call vundle#end()            " required
 filetype plugin indent on    " required
