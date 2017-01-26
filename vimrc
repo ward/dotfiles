@@ -102,6 +102,9 @@ set laststatus=2
 set ttyfast
 " Visual autocomplete for command menu
 set wildmenu
+" How to complete. longest:full goes for longest substring and shows the
+" options. Subsequent tabs then start cycling through it.
+set wildmode=longest:full,full
 " Ignore node_modules folder (also covers ctrlp plugin)
 set wildignore+=node_modules
 " Ignore jekyll's target
