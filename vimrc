@@ -72,6 +72,9 @@ let g:tagbar_type_markdown = {
     \ "sort" : 0
 \ }
 
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+let g:LatexBox_Folding = 1
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " }}}
@@ -205,8 +208,8 @@ if has("autocmd")
   " Latex ----------------------------------------------------------------- {{{
   " Enable spellcheck when writing in latex
   autocmd FileType tex setlocal spell spelllang=en_gb
-  autocmd FileType tex setlocal makeprg=latexmk\ %<
-  autocmd FileType tex setlocal foldmethod=marker
+  "autocmd FileType tex setlocal makeprg=latexmk\ %<
+  "autocmd FileType tex setlocal foldmethod=marker
   " }}}
 
   " Go -------------------------------------------------------------------- {{{
