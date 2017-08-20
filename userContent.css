@@ -16,6 +16,7 @@
  */
 
 /* Dark theme screws up input/textarea colours because of lazy webprogrammers */
+/* Disabled unless necessary since it breaks checkboxes in more recent Firefox
 input {
   -moz-appearance: none !important;
   background-color: white;
@@ -27,6 +28,7 @@ textarea {
   background-color: white;
   color: black;
 }
+*/
 
 @-moz-document domain(ycombinator.com) {
   div.comment {
