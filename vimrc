@@ -75,6 +75,13 @@ let g:tagbar_type_markdown = {
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_Folding = 1
 
+" This one has some dependencies that you have to set up yourself. For full
+" information see their README, but the important one would be
+" npm -g install instant-markdown-d
+Plugin 'suan/vim-instant-markdown'
+" Just use :InstantMarkdownPreview instead
+let g:instant_markdown_autostart = 0
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " }}}
