@@ -212,6 +212,11 @@ if has("autocmd")
   autocmd FileType markdown nmap <Leader>v :!open /tmp/%<.pdf<CR><CR>
   " }}}
 
+  " Dot ------------------------------------------------------------------ {{{
+  autocmd FileType dot setlocal makeprg=dot\ -Tpng\ %\ >\ /tmp/%<.png\ &&\ return\ 0
+  autocmd FileType dot nmap <Leader>v :!open /tmp/%<.png<CR><CR>
+  " }}}
+
   " Latex ----------------------------------------------------------------- {{{
   " Enable spellcheck when writing in latex
   autocmd FileType tex setlocal spell spelllang=en_gb
