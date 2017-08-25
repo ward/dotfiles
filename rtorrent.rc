@@ -16,6 +16,9 @@ encryption = allow_incoming,try_outgoing,enable_retry
 # Enable default ratio group
 ratio.enable=
 
+# Set a port, default ports in 6800s may be throttled
+port_range = 49177-49177
+
 # Set the limits
 # Max etc will not trigger unless this one has been met
 ratio.min.set=100
