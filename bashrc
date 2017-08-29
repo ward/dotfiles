@@ -51,60 +51,50 @@ PS2="${TXTWHT}${BAKRED}>${TXTRST} "
 # Command executed before PS1 is shown
 #PROMPT_COMMAND
 
+#### HISTORY DEFAULTS
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# Record each line as it gets issued
+PROMPT_COMMAND='history -a'
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=10000
+HISTFILESIZE=20000
+
+# Use standard ISO 8601 timestamp for `history`
+# %F equivalent to %Y-%m-%d
+# %T equivalent to %H:%M:%S (24-hours format)
+HISTTIMEFORMAT='%F %T '
+
+# Do not record some commands
+HISTIGNORE="ls:clear:l:ll"
+
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
-	PATH="$HOME/bin:$PATH"
+    PATH="$HOME/bin:$PATH"
 fi
 
 # Aliases
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias more='less'
-# Redirect to stdout, cut between :  and <
-alias myip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\  -f 2 | cut -d\< -f 1'
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
 # usage: remindme <time> <text>
 # e.g.: remindme 10m "omg, the pizza"
 function remindme()
 {
-	sleep $1 && zenity --info --text "$2" &
+    sleep $1 && zenity --info --text "$2" &
 }
-
-# Extract various archives
-extract () {
-	if [ -f $1 ] ; then
-		case $1 in
-			*.tar.bz2)   tar xvf $1        ;;
-			*.tar.gz)    tar xvf $1     ;;
-			*.bz2)       bunzip2 $1       ;;
-			*.rar)       unrar x -ad $1     ;;
-			*.gz)        gunzip $1     ;;
-			*.tar)       tar xvf $1        ;;
-			*.tbz2)      tar xvf $1      ;;
-			*.tgz)       tar xvf $1       ;;
-			*.zip)       unzip $1     ;;
-			*.Z)         uncompress $1  ;;
-			*.7z)        7z x $1    ;;
-			*)           echo "'$1' cannot be extracted by extract" ;;
-		esac
-	else
-		echo "'$1' is not a valid file"
-	fi
-}
-
-function random()
-{
-	if [ -z "$1" ]
-	then
-		echo $RANDOM
-	else
-		number=$RANDOM
-		let "number %= $1"
-		echo $number
-	fi
-}
-
 
 export EDITOR=vim
 # Make sure we don't have to do this every time we use SVN
