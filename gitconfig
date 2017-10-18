@@ -9,3 +9,5 @@
 	autocorrect = 10
 [instaweb]
 	httpd = webrick
+[core]
+	quotepath = false
