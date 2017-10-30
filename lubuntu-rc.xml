@@ -366,7 +366,7 @@
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>25%</x><y>25%</y><height>50%</height><width>50%</width></action>
     </keybind>
-    <!-- Keybindings for running applications on Home + E -->
+    <!-- Keybindings for opening home folder on windows + f -->
     <keybind key="W-f">
       <action name="Execute">
         <startupnotify>
@@ -376,7 +376,7 @@
         <command>lxsession-default file_manager</command>
       </action>
     </keybind>
-    <!-- Keybindings for running Run menu from Lxpanel on Home + R-->
+    <!-- Keybindings for running Run menu from Lxpanel on alt+space -->
     <keybind key="A-space">
       <action name="Execute">
         <command>lxsession-default launcher</command>
@@ -414,36 +414,26 @@
         <command>lxsession-default terminal</command>
       </action>
     </keybind>
-    <!-- Launch a filemanager on Ctrl + Alt + D-->
-    <keybind key="C-A-D">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>PCManFM</name>
-        </startupnotify>
-        <command>lxsession-default file_manager</command>
-      </action>
-    </keybind>
     <!-- Lock the screen on Ctrl + Alt + l-->
     <keybind key="C-A-l">
       <action name="Execute">
         <command>lxsession-default lock</command>
       </action>
     </keybind>
-    <!-- Keybinding for Volume management -->
+    <!-- Keybinding for Volume management through pulseaudio -->
     <keybind key="XF86AudioRaiseVolume">
       <action name="Execute">
-        <command>amixer -q sset Master 3%+ unmute</command>
+        <command>pactl set-sink-volume 1 +3%</command>
       </action>
     </keybind>
     <keybind key="XF86AudioLowerVolume">
       <action name="Execute">
-        <command>amixer -q sset Master 3%- unmute</command>
+        <command>pactl set-sink-volume 1 -3%</command>
       </action>
     </keybind>
     <keybind key="XF86AudioMute">
       <action name="Execute">
-        <command>amixer -q sset Master toggle</command>
+        <command>pactl set-sink-mute 1 toggle</command>
       </action>
     </keybind>
     <!-- Keybinding for music player button (on Tarantula), Spotify -->
@@ -508,12 +498,12 @@
     </keybind>
     <keybind key="C-F10">
       <action name="Execute">
-        <command>xbacklight -dec 10</command>
+        <command>xbacklight -dec 5</command>
       </action>
     </keybind>
     <keybind key="C-F11">
       <action name="Execute">
-        <command>xbacklight -inc 10</command>
+        <command>xbacklight -inc 5</command>
       </action>
     </keybind>
     <!-- Launch scrot when Print is pressed -->
