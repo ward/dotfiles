@@ -1,33 +1,24 @@
-" Vundle ------------------------------------------------------------------ {{{
-" Use vim instead of vi defaults (required)
-set nocompatible
-" (required)
-filetype off
-" set the runtime path to include Vundle and initialize
-" (need to have downloaded Vundle in that folder)
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" required
-Plugin 'VundleVim/Vundle.vim'
+" vim-plug ------------------------------------------------------------------ {{{
+" Download plug.vim (junegunn/vim-plug) and put it in autoload directory
+call plug#begin('~/.vim/plugged')
 
 " Use this area to specify plugins you want to use
 
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 " Change keyboard for ctrlp to leader o
 let g:ctrlp_map = '<Leader>o'
 
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
-Plugin 'tpope/vim-rails'
+Plug 'tpope/vim-rails'
 
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
-Plugin 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
 
-Plugin 'Valloric/YouCompleteMe'
-" This is where rustup dumps the source. Can youcomplete me not do this
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --racer-completer --js-completer', 'frozen': 1 }
+" This is where rustup dumps the source. Can youcompleteme not do this
 " automatically?
 let g:ycm_rust_src_path = '/Users/ward/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
 let g:ycm_python_binary_path = 'python'
@@ -37,7 +28,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " to trigger it. This is the YouCompleteMe command. You could use vim's omni-
 " complete directly (^x ^o), but adviced to go through YouCompleteMe instead.
 
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 let g:rust_fold = 1
 " Became hella slow?
 "let g:rustfmt_autosave = 1
@@ -45,7 +36,7 @@ let g:rust_fold = 1
 " Creates tags files in memory and uses it to display the structure of your
 " file. Note for LaTeX you will want to make sure you use ctags' HEAD version.
 " The stable version (5.8 released in 2009) sucks.
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 " Also requires "extending" ctags by adding the rust definitions (find in rust
 " repo) to a ~/.ctags file.
 let g:tagbar_type_rust = {
@@ -72,7 +63,7 @@ let g:tagbar_type_markdown = {
     \ "sort" : 0
 \ }
 
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_Folding = 1
 
 " This one has some dependencies that you have to set up yourself. For full
@@ -80,14 +71,13 @@ let g:LatexBox_Folding = 1
 " npm -g install instant-markdown-d
 " Note you may have to start macvim from the commandline for environment
 " variables to be set correctly.
-Plugin 'suan/vim-instant-markdown'
+Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
 " Just use :InstantMarkdownPreview instead
 let g:instant_markdown_autostart = 0
 " Only refresh preview on write or after non activity.
 let g:instant_markdown_slow = 1
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 " }}}
 
 " Random ------------------------------------------------------------------ {{{
