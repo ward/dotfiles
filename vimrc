@@ -78,9 +78,13 @@ let g:LatexBox_Folding = 1
 " This one has some dependencies that you have to set up yourself. For full
 " information see their README, but the important one would be
 " npm -g install instant-markdown-d
+" Note you may have to start macvim from the commandline for environment
+" variables to be set correctly.
 Plugin 'suan/vim-instant-markdown'
 " Just use :InstantMarkdownPreview instead
 let g:instant_markdown_autostart = 0
+" Only refresh preview on write or after non activity.
+let g:instant_markdown_slow = 1
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -208,7 +212,7 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
   autocmd FileType markdown setlocal spell spelllang=en_gb
   autocmd FileType markdown setlocal autoindent
-  autocmd FileType markdown setlocal makeprg=pandoc\ %\ -t\ latex\ --latex-engine=xelatex\ -o\ /tmp/%<.pdf
+  autocmd FileType markdown setlocal makeprg=pandoc\ %\ -t\ latex\ --pdf-engine=xelatex\ -o\ /tmp/%<.pdf
   autocmd FileType markdown nmap <Leader>v :!open /tmp/%<.pdf<CR><CR>
   " }}}
 
