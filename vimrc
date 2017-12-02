@@ -77,6 +77,8 @@ let g:instant_markdown_autostart = 0
 " Only refresh preview on write or after non activity.
 let g:instant_markdown_slow = 1
 
+Plug 'w0rp/ale'
+
 call plug#end()
 " }}}
 
