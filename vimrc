@@ -77,6 +77,7 @@ let g:instant_markdown_autostart = 0
 " Only refresh preview on write or after non activity.
 let g:instant_markdown_slow = 1
 
+" Asynchronous lint engine
 Plug 'w0rp/ale'
 
 call plug#end()
@@ -172,7 +173,7 @@ set incsearch
 syntax on
 set background=dark
 " Find schemes in /usr/share/vim/vim73/colors/
-"colorscheme darkblue
+colorscheme industry
 " }}}
 
 " Tabs, spacing, wrapping ------------------------------------------------- {{{
@@ -238,6 +239,6 @@ if has("autocmd")
   " For STK tinkering, we use the project's defaults
   autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
   " cd.net project defaults
-  autocmd BufNewFile,BufRead ~/sep/cd/repo/* setlocal expandtab shiftwidth=2 softtabstop=2
+  autocmd BufNewFile,BufRead ~/prog/sep/cursusdienst/* setlocal expandtab shiftwidth=2 softtabstop=2
   " }}}
 endif
