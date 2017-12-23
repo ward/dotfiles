@@ -113,11 +113,11 @@ set wildmenu
 " options. Subsequent tabs then start cycling through it.
 set wildmode=longest:full,full
 " Ignore node_modules folder (also covers ctrlp plugin)
-set wildignore+=node_modules
+set wildignore+=*/node_modules/*
 " Ignore jekyll's target
-set wildignore+=_site
+set wildignore+=*/_site/*
 " Ignore rust's target
-set wildignore+=target
+set wildignore+=*/target/*
 
 " Disable arrow keys (except for insert mode)
 map <up> <nop>
@@ -240,5 +240,13 @@ if has("autocmd")
   autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
   " cd.net project defaults
   autocmd BufNewFile,BufRead ~/prog/sep/cursusdienst/* setlocal expandtab shiftwidth=2 softtabstop=2
+  " Convoluted so I can also start `vim` without arguments and have the
+  " settings applied still. Regular matching was failing me.
+  function IgnoreTmp()
+    if getcwd() == expand("~/prog/sep/cursusdienst")
+      setlocal wildignore+=*/tmp/*
+    endif
+  endfunction
+  autocmd VimEnter * call IgnoreTmp()
   " }}}
 endif
