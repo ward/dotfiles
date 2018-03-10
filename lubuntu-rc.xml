@@ -223,27 +223,6 @@
                 <wrap>yes</wrap>
             </action>
         </keybind>
-        <!--     <keybind key="W-F1">
-      <action name="GoToDesktop">
-        <to>1</to>
-      </action>
-    </keybind>
-    <keybind key="W-F2">
-      <action name="GoToDesktop">
-        <to>2</to>
-      </action>
-    </keybind>
-    <keybind key="W-F3">
-      <action name="GoToDesktop">
-        <to>3</to>
-      </action>
-    </keybind>
-    <keybind key="W-F4">
-      <action name="GoToDesktop">
-        <to>4</to>
-      </action>
-    </keybind>
-	 -->
         <keybind key='W-d'>
             <action name='ToggleShowDesktop'/>
         </keybind>
@@ -256,21 +235,22 @@
             <action name='FocusToBottom'/>
             <action name='Unfocus'/>
         </keybind>
+        <!-- Launch scrot when Print is pressed -->
+        <keybind key='Print'>
+            <action name='Execute'>
+                <command>lxsession-default screenshot</command>
+            </action>
+        </keybind>
         <!-- Take a screenshot of the current window with scrot when Alt+Print are pressed -->
         <keybind key='A-Print'>
             <action name='Execute'>
                 <command>lxsession-default screenshot window</command>
             </action>
         </keybind>
-        <!-- Keybindings for window switching -->
-        <keybind key='A-Tab'>
-            <action name='NextWindow'>
-                <dialog>icons</dialog>
-                <finalactions>
-                    <action name='Focus'/>
-                    <action name='Raise'/>
-                    <action name='Unshade'/>
-                </finalactions>
+        <!-- Select a region with scrot when shift+print -->
+        <keybind key='S-Print'>
+            <action name='Execute'>
+                <command>scrot -s</command>
             </action>
         </keybind>
         <keybind key='A-S-Tab'>
@@ -282,130 +262,80 @@
                 </finalactions>
             </action>
         </keybind>
-        <keybind key='C-A-Tab'>
-            <action name='NextWindow'>
-                <panels>yes</panels>
-                <desktop>yes</desktop>
-                <finalactions>
-                    <action name='Focus'/>
-                    <action name='Raise'/>
-                    <action name='Unshade'/>
-                </finalactions>
+        <!-- Keybindings for window tiling -->
+        <keybind key='W-m'>
+            <action name='ToggleMaximize'/>
+        </keybind>
+        <keybind key='W-Left'>
+            <action name='UnmaximizeFull'/>
+            <action name='MoveResizeTo'>
+                <x>0</x>
+                <y>0</y>
+                <height>100%</height>
+                <width>50%</width>
             </action>
         </keybind>
-        <!-- Keybindings for window switching with the arrow keys -->
-        <keybind key='W-S-Right'>
-            <action name='DirectionalCycleWindows'>
-                <direction>right</direction>
+        <keybind key='W-Right'>
+            <action name='UnmaximizeFull'/>
+            <action name='MoveResizeTo'>
+                <x>-0</x>
+                <y>0</y>
+                <height>100%</height>
+                <width>50%</width>
+            </action>
+        </keybind>
+        <keybind key='W-Up'>
+            <action name='UnmaximizeFull'/>
+            <action name='MoveResizeTo'>
+                <x>0</x>
+                <y>0</y>
+                <width>100%</width>
+                <height>50%</height>
+            </action>
+        </keybind>
+        <keybind key='W-Down'>
+            <action name='UnmaximizeFull'/>
+            <action name='MoveResizeTo'>
+                <x>0</x>
+                <y>-0</y>
+                <width>100%</width>
+                <height>50%</height>
             </action>
         </keybind>
         <keybind key='W-S-Left'>
-            <action name='DirectionalCycleWindows'>
-                <direction>left</direction>
+            <action name='UnmaximizeFull'/>
+            <action name='MoveResizeTo'>
+                <x>0</x>
+                <y>-0</y>
+                <width>50%</width>
+                <height>50%</height>
             </action>
         </keybind>
         <keybind key='W-S-Up'>
-            <action name='DirectionalCycleWindows'>
-                <direction>up</direction>
+            <action name='UnmaximizeFull'/>
+            <action name='MoveResizeTo'>
+                <x>0</x>
+                <y>0</y>
+                <width>50%</width>
+                <height>50%</height>
             </action>
         </keybind>
         <keybind key='W-S-Down'>
-            <action name='DirectionalCycleWindows'>
-                <direction>down</direction>
-            </action>
-        </keybind>
-        <!-- Keybindings for window tiling -->
-        <keybind key='W-Up'>
-            <action name='ToggleMaximize'/>
-        </keybind>
-        <keybind key='W-j'># HalfLeftScreen
-      
-            <action name='UnmaximizeFull'/>
-            <action name='MoveResizeTo'>
-                <x>0</x>
-                <y>0</y>
-                <height>100%</height>
-                <width>50%</width>
-            </action>
-        </keybind>
-        <keybind key='W-l'># HalfRightScreen
-      
-            <action name='UnmaximizeFull'/>
-            <action name='MoveResizeTo'>
-                <x>-0</x>
-                <y>0</y>
-                <height>100%</height>
-                <width>50%</width>
-            </action>
-        </keybind>
-        <keybind key='W-i'># HalfUpperScreen
-      
-            <action name='UnmaximizeFull'/>
-            <action name='MoveResizeTo'>
-                <x>0</x>
-                <y>0</y>
-                <width>100%</width>
-                <height>50%</height>
-            </action>
-        </keybind>
-        <keybind key='W-comma'># HalfLowerScreen
-      
-            <action name='UnmaximizeFull'/>
-            <action name='MoveResizeTo'>
-                <x>0</x>
-                <y>-0</y>
-                <width>100%</width>
-                <height>50%</height>
-            </action>
-        </keybind>
-        <keybind key='W-u'># UpperLeft
-      
-            <action name='UnmaximizeFull'/>
-            <action name='MoveResizeTo'>
-                <x>0</x>
-                <y>0</y>
-                <height>50%</height>
-                <width>50%</width>
-            </action>
-        </keybind>
-        <keybind key='W-o'># UpperRight
-      
-            <action name='UnmaximizeFull'/>
-            <action name='MoveResizeTo'>
-                <x>-0</x>
-                <y>0</y>
-                <height>50%</height>
-                <width>50%</width>
-            </action>
-        </keybind>
-        <keybind key='W-m'># LowerLeft
-      
-            <action name='UnmaximizeFull'/>
-            <action name='MoveResizeTo'>
-                <x>0</x>
-                <y>-0</y>
-                <height>50%</height>
-                <width>50%</width>
-            </action>
-        </keybind>
-        <keybind key='W-period'># UpperRight
-      
             <action name='UnmaximizeFull'/>
             <action name='MoveResizeTo'>
                 <x>-0</x>
                 <y>-0</y>
-                <height>50%</height>
                 <width>50%</width>
+                <height>50%</height>
             </action>
         </keybind>
-        <keybind key='W-k'># Center
-      
+        <keybind key='S-W-Right'>
             <action name='UnmaximizeFull'/>
             <action name='MoveResizeTo'>
-                <x>25%</x>
-                <y>25%</y>
-                <height>50%</height>
+                <x>-0</x>
+                <y>0</y>
                 <width>50%</width>
+                <height>50%</height>
             </action>
         </keybind>
         <!-- Keybindings for opening home folder on windows + f -->
@@ -537,12 +467,6 @@
                 <command>xbacklight -inc 5</command>
             </action>
         </keybind>
-        <!-- Launch scrot when Print is pressed -->
-        <keybind key='Print'>
-            <action name='Execute'>
-                <command>lxsession-default screenshot</command>
-            </action>
-        </keybind>
         <!-- Launch logout when push on the shutdown button -->
         <keybind key='XF86PowerOff'>
             <action name='Execute'>
@@ -552,6 +476,15 @@
         <keybind key='A-space'>
             <action name='Execute'>
                 <command>synapse</command>
+            </action>
+        </keybind>
+        <keybind key='A-Tab'>
+            <action name='NextWindow'>
+                <finalactions>
+                    <Focus/>
+                    <Raise/>
+                    <Unshade/>
+                </finalactions>
             </action>
         </keybind>
     </keyboard>
