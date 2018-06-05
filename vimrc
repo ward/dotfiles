@@ -167,6 +167,17 @@ set ignorecase
 set smartcase
 " Start searching as you type
 set incsearch
+
+" If ag is installed, use it instead of grep
+" Can use :grep in vim now and ag will be used
+" Step through results with :cnext and :cprev. :clist to show all.
+" (Just quickfix stuff really)
+if executable('ag') 
+    " Note we extract the column as well as the file and line number
+    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepformat=%f:%l:%c%m
+endif
+
 " }}}
 
 " Syntax Highlighting ----------------------------------------------------- {{{
