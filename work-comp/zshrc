@@ -58,5 +58,25 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias l='ls -lF'
 alias ll='ls -alF'
+alias fzf='fzf --bind "ctrl-o:execute(xdg-open {})"'
 
+# Ensure the encrypted home directory is also searched
+# Be sure to run ~/bin/myupdate.sh (or cron it)
+export LOCATE_PATH=$HOME/.local/share/mlocate.db
 
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Notify if a reboot is required
+if [ -f /var/run/reboot-required ]; then
+  cat /var/run/reboot-required
+  if [ -f /var/run/reboot-required.pkgs ]; then
+    echo "for"
+    cat /var/run/reboot-required.pkgs
+  fi
+fi
+
+# Add rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
