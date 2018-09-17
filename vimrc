@@ -167,6 +167,9 @@ set ignorecase
 set smartcase
 " Start searching as you type
 set incsearch
+" Show search matches (after search, turn off temporarily with :noh
+" (:nohlsearch)
+set hlsearch
 
 " If ag is installed, use it instead of grep
 " Can use :grep in vim now and ag will be used
