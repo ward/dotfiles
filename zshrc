@@ -63,6 +63,8 @@ alias grep='grep --color=auto'
 alias l='ls -lF'
 alias ll='ls -alF'
 alias fzf='fzf --bind "ctrl-o:execute(xdg-open {})"'
+alias shuf="perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);'"
+alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 # Ensure the encrypted home directory is also searched
 # Be sure to run ~/bin/myupdate.sh (or cron it)
