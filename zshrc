@@ -88,6 +88,16 @@ fi
 if [ -d "$HOME/.rbenv" ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
+  rbenv-update() {
+    local current=$(pwd)
+    cd $HOME/.rbenv
+    echo "Running git pull in $(pwd)"
+    git pull
+    cd plugins/ruby-build
+    echo "Running git pull in $(pwd)"
+    git pull
+    cd $current
+  }
 fi
 
 # Add nvm
