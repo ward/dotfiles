@@ -1,69 +1,105 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Set up the prompt
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-#ZSH_THEME="bureau"
-ZSH_THEME="juanghurtado"
+autoload -Uz promptinit
+promptinit
+prompt clint
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+setopt histignorealldups sharehistory
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# Use emacs keybindings even if our EDITOR is set to vi
+bindkey -e
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# Use modern completion system
+autoload -Uz compinit
+compinit
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(command-not-found extract gem git)
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
 
-source $ZSH/oh-my-zsh.sh
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# User configuration
+#######
+
+# Make up/down arrow limit history to the part you already typed
+# (via ArchWiki)
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+[[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
+[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
 
 # Digraphs
 autoload insert-composed-char
 zle -N insert-composed-char
 bindkey ^K insert-composed-char
 
-# Load the default .profile
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
-
-# Add my bin to path
-export PATH=$HOME/bin:$PATH
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
+# We totally have colour
 export TERM=xterm-256color
+export EDITOR=vim
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
-export EDITOR='vim'
+# Aliases
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias l='ls -lF'
+alias ll='ls -alF'
+alias fzf='fzf --bind "ctrl-o:execute(xdg-open {})"'
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# Ensure the encrypted home directory is also searched
+# Be sure to run ~/bin/myupdate.sh (or cron it)
+export LOCATE_PATH=$HOME/.local/share/mlocate.db
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Notify if a reboot is required
+if [ -f /var/run/reboot-required ]; then
+  cat /var/run/reboot-required
+  if [ -f /var/run/reboot-required.pkgs ]; then
+    echo "for package(s):"
+    cat /var/run/reboot-required.pkgs
+  fi
+fi
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# Add rbenv
+if [ -d "$HOME/.rbenv" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+# Add nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# Rust
+if [ -d "$HOME/.cargo/bin" ]; then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+# Anaconda python
+if [ -d "$HOME/.anaconda3/bin" ]; then
+  export PATH="$HOME/.anaconda3/bin:$PATH"
+fi
