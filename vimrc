@@ -66,17 +66,6 @@ let g:tagbar_type_markdown = {
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_Folding = 1
 
-" This one has some dependencies that you have to set up yourself. For full
-" information see their README, but the important one would be
-" npm -g install instant-markdown-d
-" Note you may have to start macvim from the commandline for environment
-" variables to be set correctly.
-Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
-" Just use :InstantMarkdownPreview instead
-let g:instant_markdown_autostart = 0
-" Only refresh preview on write or after non activity.
-let g:instant_markdown_slow = 1
-
 " Asynchronous lint engine
 Plug 'w0rp/ale'
 
