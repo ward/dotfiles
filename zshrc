@@ -62,7 +62,6 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias l='ls -lF'
 alias ll='ls -alF'
-alias fzf='fzf --bind "ctrl-o:execute(xdg-open {}&)"'
 alias shuf="perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);'"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
@@ -114,4 +113,12 @@ fi
 # Anaconda python
 if [ -d "$HOME/.anaconda3/bin" ]; then
   export PATH="$HOME/.anaconda3/bin:$PATH"
+fi
+
+if [ -x "$(command -v fzf)" ]; then
+  alias fzf='fzf --bind "ctrl-o:execute(xdg-open {}&)"'
+  function fzfd() {
+    local dir
+    dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
+  }
 fi
