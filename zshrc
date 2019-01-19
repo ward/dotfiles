@@ -23,7 +23,9 @@ zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
+#eval "$(dircolors -b)"
+# Replaced by
+export LSCOLORS="Gxfxcxdxbxegedabagacad"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
@@ -58,12 +60,14 @@ export EDITOR=vim
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 # Aliases
-alias ls='ls --color=auto'
+#alias ls='ls --color=auto'
+alias ls='ls -G'
 alias grep='grep --color=auto'
 alias l='ls -lF'
 alias ll='ls -alF'
 alias shuf="perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);'"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias cdgit='cd $(git rev-parse --show-toplevel)'
 
 # Ensure the encrypted home directory is also searched
 # Be sure to run ~/bin/myupdate.sh (or cron it)
@@ -116,6 +120,8 @@ if [ -d "$HOME/.anaconda3/bin" ]; then
 fi
 
 if [ -x "$(command -v fzf)" ]; then
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
   alias fzf='fzf --bind "ctrl-o:execute(xdg-open {}&)"'
   function fzfd() {
     local dir
