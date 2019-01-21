@@ -68,6 +68,10 @@ alias ll='ls -alF'
 alias shuf="perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);'"
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias cdgit='cd $(git rev-parse --show-toplevel)'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 
 # Ensure the encrypted home directory is also searched
 # Be sure to run ~/bin/myupdate.sh (or cron it)
