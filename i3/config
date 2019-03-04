@@ -169,41 +169,22 @@ bar {
         status_command i3status
 }
 
-# ==============================
-# = From old config, to review =
-# ==============================
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command i3status -c ~/.i3/i3status.conf
-}
-
 # Control the volume with the media buttons
 # Suggestion: send SIGUSR1 to i3status afterwards, makes it update
-bindsym XF86AudioRaiseVolume exec amixer sset Master 10%+ unmute
-bindsym XF86AudioLowerVolume exec amixer sset Master 10%- unmute
-bindsym XF86AudioMute exec amixer sset Master toggle
+# bindsym XF86AudioRaiseVolume exec amixer sset Master 10%+ unmute
+# bindsym XF86AudioLowerVolume exec amixer sset Master 10%- unmute
+# bindsym XF86AudioMute exec amixer sset Master toggle
 
 # Take a screenshot
 bindsym Print exec scrot
-
-# Lock the screen (on Acer Aspire 5671 this is the P button)
-bindsym XF86Launch2 exec /home/ward/.dotfiles/i3/blurredlock.sh
-
-# Start Aurora (Firefox + 2)
-bindsym XF86WWW exec /opt/firefox/firefox
-
-assign [class="SuperTuxKart"] → 6
-# Not the desired effect
-#for_window [class="SuperTuxKart"] floating enable;
-#for_window [class="SuperTuxKart"] move position center;
-#for_window [class="SuperTuxKart"] resize shrink up 100px;
-#for_window [class="SuperTuxKart"] resize shrink right 100px;
+# TODO: Other variations for just window or selection
 
 # Set a background with `feh`
-exec --no-startup-id feh --bg-scale "/home/ward/Dropbox/bg/clouds.jpg"
+exec --no-startup-id feh --bg-scale "/home/ward/onedrive/Pictures/bg/nebraskanstorm.jpg"
 
-# Set correct variant of the keyboard (aka the one that I want)
+# Lock the screen (on Acer Aspire 5670 this is the P button)
+bindsym $mod+F1 exec /home/ward/.dotfiles/i3/blurredlock.sh
+
+# Set correct variant of the keyboard (i.e. the one that I want)
 # Is there no better (more official) way to do this?
-exec --no-startup-id setxkbmap us -variant altgr-intl
+# exec --no-startup-id setxkbmap us -variant altgr-intl
