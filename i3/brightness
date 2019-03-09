@@ -1,0 +1,16 @@
+#!/bin/sh
+
+jumpsize=5
+
+if [ "$1" = "inc" ]; then
+  xbacklight -inc $jumpsize
+fi
+if [ "$1" = "dec" ]; then
+  xbacklight -dec $jumpsize
+fi
+
+curr=$(xbacklight -get | cut -d '.' -f 1)
+notify-send -t 500 "💡$curr%"
+
+unset jumpsize
+unset curr
