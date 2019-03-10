@@ -133,8 +133,18 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# Lock session, exit session, reboot system, or poweroff system
+set $mode_system select: [l]ock (e)xit (r)eboot (p)oweroff (c)ancel
+bindsym $mod+Shift+e mode "$mode_system"
+mode "$mode_system" {
+    bindsym l exec --no-startup-id exec /home/ward/.dotfiles/i3/blurredlock.sh, mode "default"
+    bindsym Return exec --no-startup-id exec /home/ward/.dotfiles/i3/blurredlock.sh, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+    bindsym c mode "default"
+    bindsym Escape mode "default"
+}
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -182,9 +192,6 @@ bindsym $mod+Print exec maim -s /home/ward/Pictures/screenshot.$(date +"%F-%H%M%
 
 # Set a background with `feh`
 exec --no-startup-id feh --bg-scale "/home/ward/onedrive/Pictures/bg/nebraskanstorm.jpg"
-
-# Lock the screen (seems to ignore $mod?)
-bindsym $mod+F1 exec /home/ward/.dotfiles/i3/blurredlock.sh
 
 # Set correct variant of the keyboard (i.e. the one that I want)
 # Is there no better (more official) way to do this?
