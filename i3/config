@@ -170,10 +170,10 @@ bar {
 }
 
 # Control the volume with the media buttons
-# Suggestion: send SIGUSR1 to i3status afterwards, makes it update
-# bindsym XF86AudioRaiseVolume exec amixer sset Master 10%+ unmute
-# bindsym XF86AudioLowerVolume exec amixer sset Master 10%- unmute
-# bindsym XF86AudioMute exec amixer sset Master toggle
+# For a GUI, use pavucontrol-qt
+bindsym XF86AudioRaiseVolume exec amixer -c 1 -D pulse sset Master 10%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -c 1 -D pulse sset Master 10%- unmute
+bindsym XF86AudioMute exec amixer -c 1 -D pulse sset Master toggle
 
 # Take a screenshot
 bindsym Print exec scrot
