@@ -176,13 +176,14 @@ bindsym XF86AudioLowerVolume exec amixer -c 1 -D pulse sset Master 10%- unmute
 bindsym XF86AudioMute exec amixer -c 1 -D pulse sset Master toggle
 
 # Take a screenshot
-bindsym Print exec scrot
-# TODO: Other variations for just window or selection
+bindsym Print exec maim /home/ward/Pictures/screenshot.$(date +"%F-%H%M%S").png
+# Select window or rectangle
+bindsym $mod+Print exec maim -s /home/ward/Pictures/screenshot.$(date +"%F-%H%M%S").png
 
 # Set a background with `feh`
 exec --no-startup-id feh --bg-scale "/home/ward/onedrive/Pictures/bg/nebraskanstorm.jpg"
 
-# Lock the screen (on Acer Aspire 5670 this is the P button)
+# Lock the screen (seems to ignore $mod?)
 bindsym $mod+F1 exec /home/ward/.dotfiles/i3/blurredlock.sh
 
 # Set correct variant of the keyboard (i.e. the one that I want)
