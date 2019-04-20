@@ -20,6 +20,7 @@ let g:airline_powerline_fonts = 1
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --rust-completer', 'frozen': 1 }
 " This is where rustup dumps the source. Can youcompleteme not do this
 " automatically?
+" rustup component add rust-src
 let g:ycm_rust_src_path = '/home/ward/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 let g:ycm_python_binary_path = 'python'
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -31,7 +32,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 Plug 'rust-lang/rust.vim'
 let g:rust_fold = 1
 " Became hella slow?
-"let g:rustfmt_autosave = 1
+let g:rustfmt_autosave = 1
 
 " Creates tags files in memory and uses it to display the structure of your
 " file. Note for LaTeX you will want to make sure you use ctags' HEAD version.
