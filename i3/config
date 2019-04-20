@@ -199,3 +199,5 @@ exec --no-startup-id feh --bg-scale "/home/ward/onedrive/Pictures/bg/nebraskanst
 
 bindsym XF86MonBrightnessUp exec /home/ward/.dotfiles/i3/brightness inc
 bindsym XF86MonBrightnessDown exec /home/ward/.dotfiles/i3/brightness dec
+
+bindsym $mod+Shift+question exec /home/ward/.dotfiles/i3/get_i3_info

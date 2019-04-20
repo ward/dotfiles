@@ -1,0 +1,5 @@
+#!/bin/sh
+
+query="$(zenity --entry --text='Search i3 config')"
+result="$(grep -v ^# /home/ward/.config/i3/config | grep -i $query)"
+zenity --info --text="$result" --no-wrap
