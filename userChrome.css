@@ -1,3 +1,6 @@
-menuitem[label="Save Page to Pocket"] {
+/* Hides the Save Link to Pocket from the right click menu */
+menuitem[label="Save Link to Pocket"] {
   display: none !important;
 }
+/* Hides the tabs toolbar since I use Tree Style Tabs anyway */
+#TabsToolbar { visibility: collapse !important; }
