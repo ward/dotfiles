@@ -23,7 +23,14 @@ zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
+case $(uname) in
+  Linux)
+    eval "$(dircolors -b)"
+    ;;
+  Darwin)
+    export LSCOLORS="Gxfxcxdxbxegedabagacad"
+    ;;
+esac
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
@@ -58,7 +65,14 @@ export EDITOR=vim
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 # Aliases
-alias ls='ls --color=auto'
+case $(uname) in
+  Linux)
+    alias ls='ls --color=auto'
+    ;;
+  Darwin)
+    alias ls='ls -G'
+    ;;
+esac
 alias grep='grep --color=auto'
 alias l='ls -lF'
 alias ll='ls -alF'
