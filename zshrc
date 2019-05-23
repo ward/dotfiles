@@ -120,9 +120,22 @@ if [ -d "$HOME/.rbenv" ]; then
   }
 fi
 
-# Add nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# Only load nodejs when asked to
+function load_node() {
+  export NVM_DIR="$HOME/.nvm"
+  if [ -s "/usr/local/opt/nvm/nvm.sh" ]; then
+    # macOS homebrew installation
+    . "/usr/local/opt/nvm/nvm.sh"
+  elif [ -s "$NVM_DIR/nvm.sh" ]; then
+    # Manual installation
+    . "$NVM_DIR/nvm.sh"
+  fi
+  if [ -s "/usr/local/opt/nvm/etc/bash_completion" ]; then
+    # macOS homebrew installation
+    # TODO: Is there something for the manual installation
+    . "/usr/local/opt/nvm/etc/bash_completion"
+  fi
+}
 
 # Rust
 if [ -d "$HOME/.cargo/bin" ]; then
