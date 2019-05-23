@@ -216,8 +216,22 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
   autocmd FileType markdown setlocal spell spelllang=en_gb
   autocmd FileType markdown setlocal autoindent
-  autocmd FileType markdown setlocal makeprg=pandoc\ %\ -t\ latex\ --pdf-engine=xelatex\ -o\ /tmp/%<.pdf
-  autocmd FileType markdown nmap <Leader>v :!open /tmp/%<.pdf<CR><CR>
+  " I believe the following should technically work on anything that pandoc
+  " takes as input.
+  function s:pandoc_to_html()
+    :!pandoc "%" --number-sections -t html --css ~/.dotfiles/pandoc/htmlstylesheet.css -s -o /tmp/%:t.html
+    let b:pandoc_to_what_last = '.html'
+  endfunction
+  function s:pandoc_to_pdf()
+    :!pandoc "%" -t latex --pdf-engine=xelatex -o "/tmp/%:t.pdf"
+    let b:pandoc_to_what_last = '.pdf'
+  endfunction
+  function s:pandoc_open_last_made()
+    execute "!open /tmp/%:t" . b:pandoc_to_what_last
+  endfunction
+  command PandocToHtml call <SID>pandoc_to_html()
+  command PandocToPdf call <SID>pandoc_to_pdf()
+  nmap <Leader>v :call <SID>pandoc_open_last_made()<CR><CR>
   " }}}
 
   " Dot ------------------------------------------------------------------ {{{
