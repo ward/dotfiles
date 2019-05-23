@@ -131,6 +131,13 @@ endif
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
+
+" The let _s=@/ saves your register content and then puts it back afterwards
+" The <Bar> is a |, so I guess piping commands
+command StripTrailingSpaces let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s
+
+" Toggle showing these with :set list!
+set listchars=trail:·,tab:»·,eol:¬
 " }}}
 
 " Leader stuff ------------------------------------------------------------ {{{
