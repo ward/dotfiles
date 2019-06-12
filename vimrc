@@ -4,9 +4,10 @@ call plug#begin('~/.vim/plugged')
 
 " Use this area to specify plugins you want to use
 
-Plug 'ctrlpvim/ctrlp.vim'
-" Change keyboard for ctrlp to leader o
-let g:ctrlp_map = '<Leader>o'
+" --bin ensures local install, I do not want vim to manage global commands
+" (however, it seems it might have picked up on my existing fzf installation)
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 
 Plug 'scrooloose/nerdtree'
 
@@ -155,6 +156,13 @@ vmap <Leader>P "+P
 " Toggle NERDTree (better place to put this?)
 nmap <Leader>T :NERDTreeToggle<CR>
 nmap <Leader>t :TagbarToggle<CR>
+" fzf plugin
+nmap <Leader>o :Files<CR>
+" C-X C-K triggers dictionary complete
+" Default is non fuzzy and only works when spell is turned on. Advantage:
+" different languages. Can I make it use the spell dictionary instead of a
+" hardcoded location?
+" inoremap <expr> <c-x><c-k> fzf#vim#complete('cat /usr/share/dict/words')
 " }}}
 
 " Search ------------------------------------------------------------------ {{{
@@ -172,7 +180,8 @@ set hlsearch
 " Can use :grep in vim now and ag will be used
 " Step through results with :cnext and :cprev. :clist to show all.
 " (Just quickfix stuff really)
-if executable('ag') 
+" Note that fzf plugin provides both :Rg and :Ag which are probably nicer
+if executable('ag')
     " Note we extract the column as well as the file and line number
     set grepprg=ag\ --nogroup\ --nocolor\ --column
     set grepformat=%f:%l:%c%m
