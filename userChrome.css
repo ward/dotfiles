@@ -3,4 +3,6 @@ menuitem[label="Save Link to Pocket"] {
   display: none !important;
 }
 /* Hides the tabs toolbar since I use Tree Style Tabs anyway */
-#TabsToolbar { visibility: collapse !important; }
+#toolbar-menubar[inactive="true"] + #TabsToolbar {
+  visibility: collapse !important;
+}
