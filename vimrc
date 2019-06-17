@@ -70,6 +70,32 @@ let g:LatexBox_Folding = 1
 
 " Asynchronous lint engine
 Plug 'w0rp/ale'
+" Disable for rust, we use LSP
+let g:ale_linters = {
+      \ 'rust': [],
+      \}
+
+" Language Server Protocol client
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+" Echo warning/error under cursor in normal mode
+let g:lsp_diagnostics_echo_cursor = 1
+" Prettier signs
+let g:lsp_signs_error = {'text': '✗'}
+let g:lsp_signs_warning = {'text': '‼'}
+" TODO: Make lsp fill up tags?
+" See: https://github.com/prabirshrestha/vim-lsp/issues/321#issuecomment-473492723
+" Set up Rust
+" Be sure to: rustup component add rls rust-analysis rust-src
+if executable('rls')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': { server_info->['rustup', 'run', 'stable', 'rls'] },
+        \ 'workspace_config': { 'rust': { 'clippy_preference': 'on' } },
+        \ 'whitelist': ['rust'],
+        \ })
+  au FileType rust set omnifunc=lsp#complete
+endif
 
 call plug#end()
 " }}}
