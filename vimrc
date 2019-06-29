@@ -2,7 +2,7 @@
 " Download plug.vim (junegunn/vim-plug) and put it in autoload directory
 call plug#begin('~/.vim/plugged')
 
-" Use this area to specify plugins you want to use
+" General plugins
 
 " --bin ensures local install, I do not want vim to manage global commands
 " (however, it seems it might have picked up on my existing fzf installation)
@@ -11,8 +11,6 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'scrooloose/nerdtree'
 
-Plug 'tpope/vim-rails'
-
 Plug 'airblade/vim-gitgutter'
 
 Plug 'vim-airline/vim-airline'
@@ -20,11 +18,6 @@ let g:airline_powerline_fonts = 1
 
 " Pressing tab in insert mode triggers various vim built-in completions
 Plug 'ajh17/VimCompletesMe'
-
-Plug 'rust-lang/rust.vim'
-let g:rust_fold = 1
-" Became hella slow?
-let g:rustfmt_autosave = 1
 
 " Creates tags files in memory and uses it to display the structure of your
 " file. Note for LaTeX you will want to make sure you use ctags' HEAD version.
@@ -40,9 +33,6 @@ let g:tagbar_type_markdown = {
     \ ],
     \ "sort" : 0
 \ }
-
-Plug 'LaTeX-Box-Team/LaTeX-Box'
-let g:LatexBox_Folding = 1
 
 " Asynchronous lint engine
 Plug 'w0rp/ale'
@@ -72,6 +62,22 @@ if executable('rls')
         \ })
   au FileType rust set omnifunc=lsp#complete
 endif
+
+" Improved ^A and ^X (incrementing and decrementing numbers)
+" Adds support for dates, time, some other stuff
+Plug 'tpope/vim-speeddating'
+
+" Language specific plugins
+
+Plug 'tpope/vim-rails'
+
+Plug 'rust-lang/rust.vim'
+let g:rust_fold = 1
+" Became hella slow?
+let g:rustfmt_autosave = 1
+
+Plug 'LaTeX-Box-Team/LaTeX-Box'
+let g:LatexBox_Folding = 1
 
 call plug#end()
 " }}}
@@ -105,7 +111,7 @@ set wildmenu
 " How to complete. longest:full goes for longest substring and shows the
 " options. Subsequent tabs then start cycling through it.
 set wildmode=longest:full,full
-" Ignore node_modules folder (also covers ctrlp plugin)
+" Ignore node_modules folder
 set wildignore+=*/node_modules/*
 " Ignore jekyll's target
 set wildignore+=*/_site/*
@@ -260,10 +266,6 @@ if has("autocmd")
   autocmd FileType tex setlocal spell spelllang=en_gb
   "autocmd FileType tex setlocal makeprg=latexmk\ %<
   "autocmd FileType tex setlocal foldmethod=marker
-  " }}}
-
-  " Go -------------------------------------------------------------------- {{{
-  autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=0
   " }}}
 
   " R --------------------------------------------------------------------- {{{
