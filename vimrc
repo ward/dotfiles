@@ -18,17 +18,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --rust-completer', 'frozen': 1 }
-" This is where rustup dumps the source. Can youcompleteme not do this
-" automatically?
-" rustup component add rust-src
-let g:ycm_rust_src_path = '/home/ward/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
-let g:ycm_python_binary_path = 'python'
-let g:ycm_autoclose_preview_window_after_insertion = 1
-" Note: semantic completion is never triggered automatically when at top level
-" since this would be too slow. If you do need semantic completion, use ^space
-" to trigger it. This is the YouCompleteMe command. You could use vim's omni-
-" complete directly (^x ^o), but adviced to go through YouCompleteMe instead.
+" Pressing tab in insert mode triggers various vim built-in completions
+Plug 'ajh17/VimCompletesMe'
 
 Plug 'rust-lang/rust.vim'
 let g:rust_fold = 1
