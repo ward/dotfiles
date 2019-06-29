@@ -39,21 +39,6 @@ let g:rustfmt_autosave = 1
 " file. Note for LaTeX you will want to make sure you use ctags' HEAD version.
 " The stable version (5.8 released in 2009) sucks.
 Plug 'majutsushi/tagbar'
-" Also requires "extending" ctags by adding the rust definitions (find in rust
-" repo) to a ~/.ctags file.
-let g:tagbar_type_rust = {
-    \ 'ctagstype' : 'rust',
-    \ 'kinds' : [
-        \'T:types,type definitions',
-        \'f:functions,function definitions',
-        \'g:enum,enumeration names',
-        \'s:structure names',
-        \'m:modules,module names',
-        \'c:consts,static constants',
-        \'t:traits,traits',
-        \'i:impls,trait implementations',
-    \]
-\}
 " Using ctags definition via https://github.com/majutsushi/tagbar/issues/70
 let g:tagbar_type_markdown = {
     \ 'ctagstype' : 'markdown',
