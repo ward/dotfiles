@@ -61,6 +61,10 @@ if executable('rls')
         \ 'whitelist': ['rust'],
         \ })
   au FileType rust set omnifunc=lsp#complete
+  " Use my tags muscle memory to go to definitions
+  " TODO: C-T does not work since tag stack is not updated.
+  " There does not seem to be a function for pushing on the tag stack.
+  au FileType rust nnoremap <buffer> <C-]> :LspDefinition<CR>
 endif
 
 " Improved ^A and ^X (incrementing and decrementing numbers)
