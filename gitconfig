@@ -8,8 +8,6 @@
   s = status
   c = commit -v
   d = diff
-[push]
-	default = simple
 [help]
 	autocorrect = 10
 [instaweb]
