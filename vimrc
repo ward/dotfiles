@@ -1,3 +1,6 @@
+" Set space as the leader
+let mapleader = "\<Space>"
+
 " vim-plug ------------------------------------------------------------------ {{{
 " Download plug.vim (junegunn/vim-plug) and put it in autoload directory
 call plug#begin('~/.vim/plugged')
@@ -122,12 +125,6 @@ set wildignore+=*/_site/*
 " Ignore rust's target
 set wildignore+=*/target/*
 
-" Disable arrow keys (except for insert mode)
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-
 " For use with ctags, looks for tags file in current folder
 " and if not found, works its way up till it does
 set tags=./tags;/
@@ -153,9 +150,13 @@ command StripTrailingSpaces let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s
 set listchars=trail:·,tab:»·,eol:¬
 " }}}
 
-" Leader stuff ------------------------------------------------------------ {{{
-" Set space as the leader (should maybe be done earlier in the file? TODO)
-let mapleader = "\<Space>"
+" Set keyboard shortcuts -------------------------------------------------- {{{
+" Disable arrow keys (except for insert mode)
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
 " Copy/pasting to system clipboard with <Leader>copy stuff.
 " (note on Ubuntu need vim-gnome for interaction with system clipboard, not
 " regular vim)
@@ -165,11 +166,23 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
-" Toggle NERDTree (better place to put this?)
+" Toggle NERDTree and tagbar info
 nmap <Leader>T :NERDTreeToggle<CR>
 nmap <Leader>t :TagbarToggle<CR>
-" fzf plugin
+" fzf plugin to open files
 nmap <Leader>o :Files<CR>
+" Use LSP plugin bit more quickly
+nmap <Leader>? :LspHover<CR>
+
+" In insert mode, press CTRL+L to fix the most recent spelling mistake by
+" using the first suggestion. <c-g>u enables undoing it the regular way.
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
+" Open vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" Source vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
 " C-X C-K triggers dictionary complete
 " Default is non fuzzy and only works when spell is turned on. Advantage:
 " different languages. Can I make it use the spell dictionary instead of a
