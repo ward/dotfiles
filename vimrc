@@ -73,6 +73,14 @@ if executable('rls')
   au FileType rust nnoremap <buffer> <C-]> :LspDefinition<CR>
 endif
 
+if executable('ocaml-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'ocaml-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'opam config exec -- ocaml-language-server --stdio']},
+        \ 'whitelist': ['reason', 'ocaml'],
+        \ })
+endif
+
 " Improved ^A and ^X (incrementing and decrementing numbers)
 " Adds support for dates, time, some other stuff
 Plug 'tpope/vim-speeddating'
