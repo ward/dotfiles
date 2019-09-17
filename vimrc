@@ -18,6 +18,9 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
+" Override their line and column count (did not care for percentages)
+" 3 char padded current line / total lines <space> 2 char padded column
+let g:airline_section_z = "%3l/%L %2v"
 
 " Pressing tab in insert mode triggers various vim built-in completions
 Plug 'ajh17/VimCompletesMe'
