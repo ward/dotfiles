@@ -85,6 +85,10 @@ endif
 " Adds support for dates, time, some other stuff
 Plug 'tpope/vim-speeddating'
 
+" Primarily adding for OCamlformat, but other languages are supported so worth
+" looking into.
+Plug 'sbdchd/neoformat'
+
 " Language specific plugins
 
 Plug 'tpope/vim-rails'
