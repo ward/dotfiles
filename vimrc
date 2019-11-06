@@ -45,6 +45,7 @@ Plug 'w0rp/ale'
 " Disable for rust, we use LSP
 let g:ale_linters = {
       \ 'rust': [],
+      \ 'ocaml': [],
       \}
 
 " Language Server Protocol client
@@ -55,6 +56,9 @@ let g:lsp_diagnostics_echo_cursor = 1
 " Prettier signs
 let g:lsp_signs_error = {'text': '✗'}
 let g:lsp_signs_warning = {'text': '‼'}
+" Debug logging
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/vim-lsp.log')
 " TODO: Make lsp fill up tags?
 " See: https://github.com/prabirshrestha/vim-lsp/issues/321#issuecomment-473492723
 " Set up Rust
@@ -70,15 +74,20 @@ if executable('rls')
   " Use my tags muscle memory to go to definitions
   " TODO: C-T does not work since tag stack is not updated.
   " There does not seem to be a function for pushing on the tag stack.
+  " Update: Seems to be fixed upstream? Need to confirm some more.
   au FileType rust nnoremap <buffer> <C-]> :LspDefinition<CR>
+  " Lets you use K to lookup keyword under cursor
+  au FileType rust setlocal keywordprg=:LspHover
 endif
 
-if executable('ocaml-language-server')
+if executable('ocamlmerlin-lsp')
   au User lsp_setup call lsp#register_server({
-        \ 'name': 'ocaml-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'opam config exec -- ocaml-language-server --stdio']},
-        \ 'whitelist': ['reason', 'ocaml'],
+        \ 'name': 'ocamlmerlin-lsp',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'opam config exec -- ocamlmerlin-lsp']},
+        \ 'whitelist': ['ocaml'],
         \ })
+  au FileType ocaml nnoremap <buffer> <C-]> :LspDefinition<CR>
+  au FileType ocaml setlocal keywordprg=:LspHover
 endif
 
 " Improved ^A and ^X (incrementing and decrementing numbers)
@@ -186,8 +195,6 @@ nmap <Leader>T :NERDTreeToggle<CR>
 nmap <Leader>t :TagbarToggle<CR>
 " fzf plugin to open files
 nmap <Leader>o :Files<CR>
-" Use LSP plugin bit more quickly
-nmap <Leader>? :LspHover<CR>
 
 " In insert mode, press CTRL+L to fix the most recent spelling mistake by
 " using the first suggestion. <c-g>u enables undoing it the regular way.
