@@ -46,11 +46,13 @@ Plug 'w0rp/ale'
 let g:ale_linters = {
       \ 'rust': [],
       \ 'ocaml': [],
+      \ 'python': [],
       \}
 
 " Language Server Protocol client
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
+" Note you may need vim patch 5xx for yellow/red highlighting of warnings and errors
 " Echo warning/error under cursor in normal mode
 let g:lsp_diagnostics_echo_cursor = 1
 " Prettier signs
@@ -88,6 +90,17 @@ if executable('ocamlmerlin-lsp')
         \ })
   au FileType ocaml nnoremap <buffer> <C-]> :LspDefinition<CR>
   au FileType ocaml setlocal keywordprg=:LspHover
+endif
+
+if executable('pyls')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+  au FileType python nnoremap <buffer> <C-]> :LspDefinition<CR>
+  " Does not seem to work as I hoped here?
+  au FileType python setlocal keywordprg=:LspHover
 endif
 
 " Improved ^A and ^X (incrementing and decrementing numbers)
