@@ -84,6 +84,15 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+## An alias for when you encounter an open directory with books.
+# The --accept screws you over when the path/filename gets too long. wget
+# automatically rewrites the file name when it gets too long. In doing so, the
+# extension is likely to disappear and become ".tmp". Of course, that does not
+# match and the file is deleted despite it being what you wanted. <_< Adding
+# tmp in accept seems to work, then explicitly rejecting index.html.tmp to not
+# become all cluttered.
+alias wget-books='wget --recursive --no-clobber --no-parent --accept epub,mobi,pdf,tmp,cbr,cbz --reject index.html.tmp'
+
 # Ensure the encrypted home directory is also searched
 # Be sure to run ~/bin/myupdate.sh (or cron it)
 export LOCATE_PATH=$HOME/.local/share/mlocate.db

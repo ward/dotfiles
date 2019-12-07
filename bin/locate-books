@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Use updatedb and locate with custom folders/database to search books
+
+IGNORE_PATHS=""
+BOOK_ROOT_FOLDER="/mnt/books/"
+DATABASE="$HOME/.local/share/locatebooks.db"
+
+if [ "$1" == "--help" ];
+then
+  echo "Use --update-search-index to create a new index."
+  echo "Use with other stuff to perform a search."
+  echo "Note that other flags will also get passed on to locate".
+  exit 0
+fi
+
+if [ "$1" == "--update-search-index" ];
+then
+  echo "Updating search index..."
+  updatedb -l 0 -e "$IGNORE_PATHS" -o "$DATABASE" -U "$BOOK_ROOT_FOLDER"
+  echo "Finished."
+  exit 0
+fi
+
+# If LOCATE_PATH is set, it gets added to locate databases to use. Don't want
+# that
+unset LOCATE_PATH
+# $@ is just all the arguments (besides $0) passed to the script
+locate --database "$DATABASE" --all --basename --ignore-case --ignore-spaces "$@"
