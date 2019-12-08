@@ -108,9 +108,13 @@ endif
 " Adds support for dates, time, some other stuff
 Plug 'tpope/vim-speeddating'
 
-" Primarily adding for OCamlformat, but other languages are supported so worth
-" looking into.
+" Handle calling the formatter of a language so we do not need to worry about
+" things. Will just pick up on what is installed.
 Plug 'sbdchd/neoformat'
+" If no formatter found, just does regular = on entire document
+let g:neoformat_basic_format_align = 1
+" There are also fallbacks for tabs to spaces and removing trailing spaces
+nnoremap <Leader>= :Neoformat<CR>
 
 " Language specific plugins
 
