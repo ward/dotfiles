@@ -346,3 +346,16 @@ if has("autocmd")
   autocmd VimEnter * call IgnoreTmp()
   " }}}
 endif
+
+" Trying out things in order to seamlessly work with Scheme in class.
+function! OpenR5RS(path)
+  let prelude = [
+        \ "(#%require xrepl)",
+        \ "(load \"" . a:path . "\")",
+        \ "\<CR>"
+        \ ]->join("")
+  let term = term_start("plt-r5rs --no-prim", {"term_finish": "close"})
+  call term_sendkeys("", prelude)
+endfunction
+
+nnoremap <LocalLeader>s :call OpenR5RS(@%)<CR>
