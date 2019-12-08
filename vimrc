@@ -90,6 +90,7 @@ if executable('ocamlmerlin-lsp')
         \ })
   au FileType ocaml nnoremap <buffer> <C-]> :LspDefinition<CR>
   au FileType ocaml setlocal keywordprg=:LspHover
+  au FileType ocaml setlocal omnifunc=lsp#complete
 endif
 
 if executable('pyls')
