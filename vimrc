@@ -116,6 +116,9 @@ let g:neoformat_basic_format_align = 1
 " There are also fallbacks for tabs to spaces and removing trailing spaces
 nnoremap <Leader>= :Neoformat<CR>
 
+Plug 'dbeniamine/todo.txt-vim'
+autocmd BufNewFile,BufRead *.todo set ft=todo
+
 " Language specific plugins
 
 Plug 'tpope/vim-rails'
@@ -362,4 +365,4 @@ function! OpenR5RS(path)
   call term_sendkeys("", prelude)
 endfunction
 
-nnoremap <LocalLeader>s :call OpenR5RS(@%)<CR>
+autocmd FileType scheme nnoremap <LocalLeader>s :call OpenR5RS(@%)<CR>
