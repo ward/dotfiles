@@ -1,0 +1,14 @@
+directory: /path/to/music/folder
+asciify_paths: yes
+# plugins: fromfilename
+import:
+        copy: yes
+        timid: yes
+format_item: "$artist - $album - #$track $title"
+# Took the defaults, added original_year for regular stuff
+# Prefer it so folder view shows the albums of an artist in order
+paths:
+        default: $albumartist/$original_year.$album%aunique{}/$track $title
+        singleton: Non-Album/$artist/$title
+        comp: Compilations/$album%aunique{}/$track $title
+
