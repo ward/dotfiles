@@ -1,0 +1,18 @@
+# Belongs in ~/.config/beets/config.yaml
+
+directory: /mnt/nas-audio/music
+asciify_paths: yes
+# For something with no metadata, but the filename should be enough to
+# recognise everything.
+# plugins: fromfilename
+import:
+        copy: yes
+        timid: yes
+format_item: "$artist - $album - #$track $title"
+format_album: "$albumartist - $album ($original_year)"
+# Took the defaults, added original_year for regular stuff
+# Prefer it so folder view shows the albums of an artist in order
+paths:
+        default: $albumartist/$original_year.$album%aunique{}/$track $title
+        singleton: Non-Album/$artist/$title
+        comp: Compilations/$album%aunique{}/$track $title
