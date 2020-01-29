@@ -1,5 +1,5 @@
-" Set space as the leader
 let mapleader = "\<Space>"
+let maplocalleader = "\\"
 
 " vim-plug ------------------------------------------------------------------ {{{
 " Download plug.vim (junegunn/vim-plug) and put it in autoload directory
@@ -72,7 +72,7 @@ if executable('rls')
         \ 'workspace_config': { 'rust': { 'clippy_preference': 'on' } },
         \ 'whitelist': ['rust'],
         \ })
-  au FileType rust set omnifunc=lsp#complete
+  au FileType rust setlocal omnifunc=lsp#complete
   " Use my tags muscle memory to go to definitions
   " TODO: C-T does not work since tag stack is not updated.
   " There does not seem to be a function for pushing on the tag stack.
@@ -115,9 +115,13 @@ Plug 'sbdchd/neoformat'
 let g:neoformat_basic_format_align = 1
 " There are also fallbacks for tabs to spaces and removing trailing spaces
 nnoremap <Leader>= :Neoformat<CR>
+vnoremap <Leader>= :'<,'>Neoformat<CR>
 
 Plug 'dbeniamine/todo.txt-vim'
-autocmd BufNewFile,BufRead *.todo set ft=todo
+augroup todo_ft_group
+  autocmd!
+  autocmd BufNewFile,BufRead *.todo setlocal ft=todo
+augroup END
 
 " Language specific plugins
 
@@ -202,20 +206,23 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
+" Escape normal mode
+inoremap kjk <esc>
+
 " Copy/pasting to system clipboard with <Leader>copy stuff.
 " (note on Ubuntu need vim-gnome for interaction with system clipboard, not
 " regular vim)
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+vnoremap <Leader>y "+y
+vnoremap <Leader>d "+d
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
 " Toggle NERDTree and tagbar info
-nmap <Leader>T :NERDTreeToggle<CR>
-nmap <Leader>t :TagbarToggle<CR>
+nnoremap <Leader>T :NERDTreeToggle<CR>
+nnoremap <Leader>t :TagbarToggle<CR>
 " fzf plugin to open files
-nmap <Leader>o :Files<CR>
+nnoremap <Leader>o :Files<CR>
 
 " In insert mode, press CTRL+L to fix the most recent spelling mistake by
 " using the first suggestion. <c-g>u enables undoing it the regular way.
@@ -286,18 +293,24 @@ if has("autocmd")
   filetype plugin indent on
   " Language specific settings -------------------------------------------- {{{
   " Python ---------------------------------------------------------------- {{{
-  autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
-  " Run current file in ipython and give shell (pip install ipython required)
-  autocmd FileType python nmap <Leader>r :!ipython -i %<CR>
-  " When teaching ICW, using idle is preferred
-  "autocmd FileType python nmap <Leader>r :!idle -r % &<CR><CR>
+  augroup pythongroup
+    autocmd!
+    autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+    " Run current file in ipython and give shell (pip install ipython required)
+    autocmd FileType python nnoremap <buffer> <localleader>r :!ipython -i %<CR>
+    " When teaching ICW, using idle is preferred
+    "autocmd FileType python nmap <Leader>r :!idle -r % &<CR><CR>
+  augroup END
   " }}}
 
   " Markdown -------------------------------------------------------------- {{{
   " My only .md files are markdown
-  autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
-  autocmd FileType markdown setlocal spell spelllang=en_gb
-  autocmd FileType markdown setlocal autoindent
+  augroup markdowngroup
+    autocmd!
+    autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+    autocmd FileType markdown setlocal spell spelllang=en_gb
+    autocmd FileType markdown setlocal autoindent
+  augroup END
   " I believe the following should technically work on anything that pandoc
   " takes as input.
   function s:pandoc_to_html()
@@ -313,44 +326,62 @@ if has("autocmd")
   endfunction
   command PandocToHtml call <SID>pandoc_to_html()
   command PandocToPdf call <SID>pandoc_to_pdf()
-  nmap <Leader>v :call <SID>pandoc_open_last_made()<CR><CR>
+  nnoremap <buffer> <Leader>v :call <SID>pandoc_open_last_made()<CR><CR>
   " }}}
 
   " Dot ------------------------------------------------------------------ {{{
-  autocmd FileType dot setlocal makeprg=dot\ -Tpng\ %\ >\ /tmp/%<.png\ &&\ return\ 0
-  autocmd FileType dot nmap <Leader>v :!open /tmp/%<.png<CR><CR>
+  augroup dotgroup
+    autocmd!
+    autocmd FileType dot setlocal makeprg=dot\ -Tpng\ %\ >\ /tmp/%<.png\ &&\ return\ 0
+    autocmd FileType dot nnoremap <buffer> <Leader>v :!open /tmp/%<.png<CR><CR>
+  augroup END
   " }}}
 
   " Latex ----------------------------------------------------------------- {{{
   " Enable spellcheck when writing in latex
-  autocmd FileType tex setlocal spell spelllang=en_gb
-  "autocmd FileType tex setlocal makeprg=latexmk\ %<
-  "autocmd FileType tex setlocal foldmethod=marker
+  augroup latexgroup
+    autocmd!
+    autocmd FileType tex setlocal spell spelllang=en_gb
+    "autocmd FileType tex setlocal makeprg=latexmk\ %<
+    "autocmd FileType tex setlocal foldmethod=marker
+  augroup END
   " }}}
 
   " R --------------------------------------------------------------------- {{{
   " Have make just run the current file
-  autocmd FileType r setlocal makeprg=R\ --no-save\ -q\ <%
+  augroup rlanggroup
+    autocmd!
+    autocmd FileType r setlocal makeprg=R\ --no-save\ -q\ <%
+  augroup END
   " }}}
 
   " Vim ------------------------------------------------------------------- {{{
-  autocmd FileType vim setlocal foldmethod=marker
+  augroup vimgroup
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+  augroup END
   " }}}
   " }}}
   " Project specific settings --------------------------------------------- {{{
   " Does this stuff really belong in a vimrc? (No)
   " For STK tinkering, we use the project's defaults
-  autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
+  augroup stkproject
+    autocmd!
+    autocmd BufNewFile,BufRead /opt/supertuxkart/stk/src/* setlocal expandtab shiftwidth=4 softtabstop=4
+  augroup END
   " cd.net project defaults
-  autocmd BufNewFile,BufRead ~/prog/sep/cursusdienst/* setlocal expandtab shiftwidth=2 softtabstop=2
-  " Convoluted so I can also start `vim` without arguments and have the
-  " settings applied still. Regular matching was failing me.
+  " Convoluted so I can also start `vim` without arguments and have this
+  " setting applied still. Regular matching was failing me.
   function IgnoreTmp()
     if getcwd() == expand("~/prog/sep/cursusdienst")
       setlocal wildignore+=*/tmp/*
     endif
   endfunction
-  autocmd VimEnter * call IgnoreTmp()
+  augroup cdnet
+    autocmd!
+    autocmd BufNewFile,BufRead ~/prog/sep/cursusdienst/* setlocal expandtab shiftwidth=2 softtabstop=2
+    autocmd VimEnter * call IgnoreTmp()
+  augroup END
   " }}}
 endif
 
@@ -365,4 +396,7 @@ function! OpenR5RS(path)
   call term_sendkeys("", prelude)
 endfunction
 
-autocmd FileType scheme nnoremap <LocalLeader>s :call OpenR5RS(@%)<CR>
+augroup r5rsgroup
+  autocmd!
+  autocmd FileType scheme nnoremap <buffer> <LocalLeader>s :call OpenR5RS(@%)<CR>
+augroup END
