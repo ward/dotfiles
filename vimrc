@@ -41,7 +41,8 @@ let g:tagbar_type_markdown = {
 \ }
 
 " Asynchronous lint engine
-Plug 'w0rp/ale'
+" Apparently they are an LSP client now too...
+Plug 'dense-analysis/ale'
 " Disable for rust, we use LSP
 let g:ale_linters = {
       \ 'rust': [],
@@ -122,6 +123,8 @@ augroup todo_ft_group
   autocmd!
   autocmd BufNewFile,BufRead *.todo setlocal ft=todo
 augroup END
+
+Plug 'editorconfig/editorconfig-vim'
 
 " Language specific plugins
 
