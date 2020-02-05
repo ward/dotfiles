@@ -211,6 +211,10 @@ map <right> <nop>
 
 " Escape normal mode
 inoremap kjk <esc>
+vnoremap kjk <esc>
+" Force me to practice
+inoremap <c-[> <nop>
+vnoremap <c-[> <nop>
 
 " Copy/pasting to system clipboard with <Leader>copy stuff.
 " (note on Ubuntu need vim-gnome for interaction with system clipboard, not
