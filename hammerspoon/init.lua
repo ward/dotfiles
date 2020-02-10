@@ -3,6 +3,8 @@
 hs.loadSpoon("Lunette")
 spoon.Lunette:bindHotkeys()
 
+amphetamine = require "amphetamine"
+
 -- Doing it through standard Mac ways resulted in it not working in Finder.
 -- Instead just making the binding here.
 hs.hotkey.bind({"ctrl", "cmd"}, "T", function()
