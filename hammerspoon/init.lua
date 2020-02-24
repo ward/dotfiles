@@ -35,7 +35,7 @@ tap = hs.eventtap.new({hs.eventtap.event.types.NSSystemDefined}, function(event)
   -- When I want to add Back/forward, they event keys are: REWIND and FAST
   if sys_key_event and sys_key_event.key == "PLAY" then
     -- Only if Quod Libet is running do we do something special
-    if hs.application.get("io.github.quodlibet.quodlibet") then
+    if hs.application.get("io.github.quodlibet.QuodLibet") then
       if sys_key_event.down then
         hs.execute("/Applications/QuodLibet.app/Contents/MacOS/quodlibet --play-pause")
         hs.alert.show("Toggled play-pause of Quod Libet.")
