@@ -12,8 +12,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'scrooloose/nerdtree'
-
 Plug 'airblade/vim-gitgutter'
 
 Plug 'vim-airline/vim-airline'
@@ -202,6 +200,10 @@ command StripTrailingSpaces let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s
 set listchars=trail:·,tab:»·,eol:¬
 " }}}
 
+" Set up vim's file browser ----------------------------------------------- {{{
+let g:netrw_liststyle = 3 " Default to tree, change it with: i
+" }}}
+
 " Set keyboard shortcuts -------------------------------------------------- {{{
 " Disable arrow keys (except for insert mode)
 map <up> <nop>
@@ -225,8 +227,8 @@ nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>P "+P
-" Toggle NERDTree and tagbar info
-nnoremap <Leader>T :NERDTreeToggle<CR>
+" Open netrw and toggle tagbar
+nnoremap <Leader>T :Vexplore<CR>
 nnoremap <Leader>t :TagbarToggle<CR>
 " fzf plugin to open files
 nnoremap <Leader>o :Files<CR>
