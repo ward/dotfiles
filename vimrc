@@ -1,6 +1,8 @@
 let mapleader = "\<Space>"
 let maplocalleader = "\\"
 
+filetype plugin on
+
 " vim-plug ------------------------------------------------------------------ {{{
 " Download plug.vim (junegunn/vim-plug) and put it in autoload directory
 call plug#begin('~/.vim/plugged')
@@ -396,19 +398,3 @@ if has("autocmd")
   augroup END
   " }}}
 endif
-
-" Trying out things in order to seamlessly work with Scheme in class.
-function! OpenR5RS(path)
-  let prelude = [
-        \ "(#%require xrepl)",
-        \ "(load \"" . a:path . "\")",
-        \ "\<CR>"
-        \ ]->join("")
-  let term = term_start("plt-r5rs --no-prim", {"term_finish": "close"})
-  call term_sendkeys("", prelude)
-endfunction
-
-augroup r5rsgroup
-  autocmd!
-  autocmd FileType scheme nnoremap <buffer> <LocalLeader>s :call OpenR5RS(@%)<CR>
-augroup END
