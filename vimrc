@@ -146,6 +146,8 @@ set nocompatible
 set encoding=utf-8
 " Show --INSERT-- etc mode when in one
 set showmode
+" Show commands that are being typed
+set showcmd
 " Show where in the document we are
 set ruler
 " Allow backspacing over everything in insert mode
@@ -200,7 +202,7 @@ command StripTrailingSpaces let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s
 set listchars=trail:·,tab:»·,eol:¬
 " }}}
 
-" Set up vim's file browser ----------------------------------------------- {{{
+" Built-in file browsing -------------------------------------------------- {{{
 let g:netrw_liststyle = 3 " Default to tree, change it with: i
 " }}}
 
@@ -328,7 +330,7 @@ if has("autocmd")
     let b:pandoc_to_what_last = '.html'
   endfunction
   function s:pandoc_to_pdf()
-    :!pandoc "%" -t latex --pdf-engine=xelatex -o "/tmp/%:t.pdf"
+    :!pandoc "%" -t latex --pdf-engine=lualatex -o "/tmp/%:t.pdf"
     let b:pandoc_to_what_last = '.pdf'
   endfunction
   function s:pandoc_open_last_made()
@@ -342,8 +344,8 @@ if has("autocmd")
   " Dot ------------------------------------------------------------------ {{{
   augroup dotgroup
     autocmd!
-    autocmd FileType dot setlocal makeprg=dot\ -Tpng\ %\ >\ /tmp/%<.png\ &&\ return\ 0
-    autocmd FileType dot nnoremap <buffer> <Leader>v :!open /tmp/%<.png<CR><CR>
+    autocmd FileType dot setlocal makeprg=dot\ -Tpdf\ %\ >\ /tmp/%<.pdf\ &&\ return\ 0
+    autocmd FileType dot nnoremap <buffer> <Leader>v :!open /tmp/%<.pdf<CR><CR>
   augroup END
   " }}}
 
