@@ -2,12 +2,13 @@
 	name = Ward Muylaert
 	email = ward.muylaert@gmail.com
 [core]
-  editor = vim
+	editor = vim
 [alias]
-	logp = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-  s = status
-  c = commit -v
-  d = diff
+	logp = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) %C(green)(%ad)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	logpabs = logp --date=short
+	s = status
+	c = commit -v
+	d = diff
 [help]
 	autocorrect = 10
 [instaweb]
