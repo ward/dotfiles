@@ -84,6 +84,10 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+# View markdown file as a man page
+function mman {
+  pandoc -s -t man "$1" | groff -T utf8 -man | ${PAGER:-less}
+}
 ## An alias for when you encounter an open directory with books.
 # The --accept screws you over when the path/filename gets too long. wget
 # automatically rewrites the file name when it gets too long. In doing so, the
