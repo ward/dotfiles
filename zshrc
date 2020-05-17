@@ -88,6 +88,18 @@ alias .....='cd ../../../..'
 function mman {
   pandoc -s -t man "$1" | groff -T utf8 -man | ${PAGER:-less}
 }
+
+case $(uname) in
+  Linux)
+    alias open='xdg-open'
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+    ;;
+  Darwin)
+    # Nothing at the moment
+    ;;
+esac
+
 ## An alias for when you encounter an open directory with books.
 # The --accept screws you over when the path/filename gets too long. wget
 # automatically rewrites the file name when it gets too long. In doing so, the
