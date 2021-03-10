@@ -58,6 +58,10 @@ zle -N down-line-or-beginning-search
 autoload insert-composed-char
 zle -N insert-composed-char
 bindkey ^K insert-composed-char
+# Unicode input. Press keycode, type hexa number, press keycode again
+autoload insert-unicode-char
+zle -N insert-unicode-char
+bindkey '^Xk' insert-unicode-char
 
 # We totally have colour
 export TERM=xterm-256color
