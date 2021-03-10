@@ -135,8 +135,11 @@ let g:rust_fold = 1
 " Became hella slow?
 let g:rustfmt_autosave = 1
 
-Plug 'LaTeX-Box-Team/LaTeX-Box'
-let g:LatexBox_Folding = 1
+" TODO: This is unmaintained and did not seem to work any more
+" when it came to compiling. The text objects are probably still
+" useful though.
+" Plug 'LaTeX-Box-Team/LaTeX-Box'
+" let g:LatexBox_Folding = 1
 
 call plug#end()
 " }}}
@@ -220,7 +223,7 @@ inoremap kjk <esc>
 " Too annoying in visual mode, selecting has a lag when moving up
 " vnoremap kjk <esc>
 " Force me to practice
-inoremap <c-[> <nop>
+" inoremap <c-[> <nop>
 " vnoremap <c-[> <nop>
 
 " Copy/pasting to system clipboard with <Leader>copy stuff.
@@ -261,9 +264,11 @@ set ignorecase
 set smartcase
 " Start searching as you type
 set incsearch
-" Show search matches (after search, turn off temporarily with :noh
+" Show search matches (after search, turn off temporarily with :noh)
 " (:nohlsearch)
 set hlsearch
+" Shortcut for turning off search matches
+nnoremap <Leader>/ :nohlsearch<CR>
 
 " If ag is installed, use it instead of grep
 " Can use :grep in vim now and ag will be used
@@ -356,7 +361,8 @@ if has("autocmd")
   augroup latexgroup
     autocmd!
     autocmd FileType tex setlocal spell spelllang=en_gb
-    "autocmd FileType tex setlocal makeprg=latexmk\ %<
+    autocmd FileType tex setlocal makeprg=latexmk\ %<
+    autocmd FileType tex nnoremap <buffer> <LocalLeader>ll :make<CR>
     "autocmd FileType tex setlocal foldmethod=marker
   augroup END
   " }}}
