@@ -193,6 +193,9 @@ exec --no-startup-id feh --bg-scale "/home/ward/onedrive/Pictures/bg/nebraskanst
 # Is there no better (more official) way to do this?
 # exec --no-startup-id setxkbmap us -variant altgr-intl
 
+# Make caps lock an extra escape. See `man xkeyboard-config` for options
+exec --no-startup-id setxkbmap -option caps:escape
+
 bindsym XF86MonBrightnessUp exec /home/ward/.dotfiles/i3/brightness inc
 bindsym XF86MonBrightnessDown exec /home/ward/.dotfiles/i3/brightness dec
 
