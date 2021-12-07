@@ -3,6 +3,8 @@ menuitem[label="Save Link to Pocket"] {
   display: none !important;
 }
 /* Hides the tabs toolbar since I use Tree Style Tabs anyway */
+/* Disabled, broken, it hides the URL bar too now (21 July 2021)
 #toolbar-menubar[inactive="true"] + #TabsToolbar {
   visibility: collapse !important;
 }
+*/
