@@ -66,7 +66,6 @@ bindkey '^Xk' insert-unicode-char
 # We totally have colour
 export TERM=xterm-256color
 export EDITOR=vim
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 # Aliases
 case $(uname) in
@@ -87,6 +86,8 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+# cal defaults to Sunday first day...
+alias cal='ncal'
 
 # View markdown file as a man page
 function mman {
@@ -182,6 +183,9 @@ if [ -x "$(command -v fzf)" ]; then
   alias fzf='fzf --bind "ctrl-o:execute(xdg-open {}&)"'
   function fzfd() {
     local dir
-    dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
+    dir=$(/usr/bin/find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
   }
+  export FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git"
 fi
+
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
