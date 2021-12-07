@@ -112,6 +112,7 @@ Plug 'tpope/vim-speeddating'
 " Handle calling the formatter of a language so we do not need to worry about
 " things. Will just pick up on what is installed.
 Plug 'sbdchd/neoformat'
+let g:neoformat_enabled_python = ['black']
 " If no formatter found, just does regular = on entire document
 let g:neoformat_basic_format_align = 1
 " There are also fallbacks for tabs to spaces and removing trailing spaces
@@ -402,5 +403,18 @@ if has("autocmd")
     autocmd BufNewFile,BufRead ~/prog/sep/cursusdienst/* setlocal expandtab shiftwidth=2 softtabstop=2
     autocmd VimEnter * call IgnoreTmp()
   augroup END
+
+  " Take OSM share's coordinate, swap it around, put [] around and a ,
+  " inbetween.
+  " Input: geo:36.9044,-116.7857?z=13
+  " Output: [-116.7857, 36.9044]
+  let @g='^d4lf?d$^df,$a, pxa]I['
   " }}}
 endif
+
+" Combining upper dot character. Useful to, e.g., type V̇
+" First type V, then CTRL+K, then <.
+digraph <. 775
+digraph ?! 8253
+digraph :) 128578
+digraph <3 10084
