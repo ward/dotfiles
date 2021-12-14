@@ -19,7 +19,7 @@ function! s:GetVisualSelection()
 endfunction
 
 function! s:SendR5RSkeys()
-  call term_sendkeys(s:term, s:GetVisualSelection())
+  call term_sendkeys(s:term, s:GetVisualSelection() . "\n")
 endfunction
 
 nnoremap <buffer> <LocalLeader>s :call <sid>OpenR5RS(@%)<CR>
