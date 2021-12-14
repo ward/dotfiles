@@ -29,11 +29,20 @@ hs.hotkey.bind({}, "F17", function()
   hs.execute(shell_command)
 end)
 
+hs.hotkey.bind({}, "F16", function()
+  if hs.spotify.isRunning() then
+    hs.spotify.playpause()
+    hs.spotify.displayCurrentTrack()
+  end
+end)
+
 -- Intercept press on PLAY button
 tap = hs.eventtap.new({hs.eventtap.event.types.NSSystemDefined}, function(event)
   local sys_key_event = event:systemKey()
   -- When I want to add Back/forward, they event keys are: REWIND and FAST
   if sys_key_event and sys_key_event.key == "PLAY" then
+    -- local blab = hs.application.find(20488):bundleID()
+    -- hs.alert.show(blab)
     -- Only if Quod Libet is running do we do something special
     if hs.application.get("io.github.quodlibet.QuodLibet") then
       if sys_key_event.down then
