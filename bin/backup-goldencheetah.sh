@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 GOLDENCHEETAH_LIBRARY="$HOME/.goldencheetah"
 GOLDENCHEETAH_DOT_CONFIG="$HOME/.config/goldencheetah.org"
