@@ -9,9 +9,19 @@
 	s = status
 	c = commit -v
 	d = diff
-[help]
-	autocorrect = 10
 [instaweb]
 	httpd = webrick
 [core]
 	quotepath = false
+  pager = delta
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
