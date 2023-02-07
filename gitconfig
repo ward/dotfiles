@@ -4,24 +4,37 @@
 [core]
 	editor = vim
 [alias]
-	logp = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) %C(green)(%ad)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	logp = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) %C(green)(%ad)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all --not --remotes=*/gh-pages
 	logpabs = logp --date=short
 	s = status
 	c = commit -v
 	d = diff
+	cdiff = diff --color-words
+	cshow = show --color-words
+	ndiff = difftool --tool nvimdiff --no-prompt
 [instaweb]
 	httpd = webrick
 [core]
 	quotepath = false
-  pager = delta
+	# Try out https://github.com/dandavison/delta
+	pager = delta
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
+
 
 [delta]
-    navigate = true  # use n and N to move between diff sections
+	navigate = true  # use n and N to move between diff sections
+	line-numbers = true
 
 [merge]
-    conflictstyle = diff3
+	conflictstyle = diff3
 
 [diff]
-    colorMoved = default
+	colorMoved = default
+
+[pull]
+	rebase = false
+[init]
+	defaultBranch = master
+
+# Remember: tig
