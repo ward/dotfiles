@@ -10,6 +10,12 @@ setopt histignorealldups sharehistory
 # bindkey -e
 # Use vim keybindings
 bindkey -v
+# Press esc-v to edit the command in EDITOR
+# <https://stackoverflow.com/a/903973/411495>
+# This is a default in bash (^X^E when in emacs mode) and... damn that can be useful
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
