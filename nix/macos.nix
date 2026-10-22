@@ -4,6 +4,8 @@
 # -f based on this file
 # -r remove all the rest
 
+# Might also want to run nix-collect-garbage from time to time
+
 # See https://ianthehenry.com/posts/how-to-learn-nix/declarative-user-environment/
 
 with import <nixpkgs> {}; [
@@ -13,12 +15,21 @@ with import <nixpkgs> {}; [
 	jq
 	mdbook
 	mupdf
+	osmium-tool
+	rclone
 	rink
+	# Verify what version this would install. 23.11 repo is a bit behind
+	# ruff
 	tealdeer
+	typst
+	typstyle # Formatter for typst
+	wget
 	zola
-	# Coq
-	coq
-	coqPackages.coq-lsp
+	# Coq:
+	# coq
+	# coqPackages.coq-lsp
 	# Money
 	hledger
+	# Speech to text
+	openai-whisper
 ]
