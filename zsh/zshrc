@@ -1,0 +1,99 @@
+autoload -Uz compinit promptinit
+# What does this do in terms of files that contain more than functions? Does
+# everything get executed?
+fpath=("$HOME/prog/dotfiles/zsh" $fpath)
+compinit
+promptinit
+
+prompt my_clint
+
+setopt histignorealldups sharehistory
+
+export HISTSIZE=10000
+export SAVEHIST=$HISTSIZE
+
+# Was not working in tmux without making it explicit? Might have to do with login and other shells.
+bindkey "^R" history-incremental-pattern-search-backward
+
+# Can this terminal title setting go to its own file?
+# Set terminal title and also do so automatically for some events
+function set_terminal_title() {
+  print -Pn "\e]1;$*:q\a"
+  print -Pn "\e]2;$*:q\a"
+}
+
+autoload -Uz add-zsh-hook
+function _precmd_title() {
+	local folder="${PWD##*/}"
+	if [[ "$PWD"  = "$HOME" ]]; then
+		folder="~"
+	fi
+	set_terminal_title "$folder"
+}
+function _preexec_title() {
+	setopt extended_glob
+	local folder="${PWD##*/}"
+	if [[ "$PWD"  = "$HOME" ]]; then
+		folder="~"
+	fi
+	local cmd=${1[(wr)^(*=*|sudo|ssh|mosh|rake|-*)]:gs/%/%%}
+	set_terminal_title "$folder: $cmd"
+}
+add-zsh-hook precmd _precmd_title
+add-zsh-hook preexec _preexec_title
+
+# Use ^X e to edit command line in $EDITOR
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+
+# How to make case insensitive?
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=long
+
+# Up search with what is currently front of the prompt
+autoload -U up-line-or-beginning-search
+zle -N up-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+
+# Digraphs with ^K
+autoload insert-composed-char
+zle -N insert-composed-char
+bindkey ^K insert-composed-char
+# Unicode input. Press keycode, type hexa number, press keycode again
+autoload insert-unicode-char
+zle -N insert-unicode-char
+bindkey '^Xk' insert-unicode-char
+
+export EDITOR=nvim
+
+# Aliases
+alias l='ls -lh --color=auto -F'
+alias ll='ls -alh --color=auto -F'
+alias cdgit='cd $(git rev-parse --show-toplevel)'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# Can also fast forward from local branch with git fetch . srcbranch:dstbranch
+alias ,git-update-develop='git fetch origin develop:develop'
+alias ,git-tag='git tag --list -n1 | sort -V'
+
+export PATH="$PATH:/Users/wmuylaert/.local/bin"
+
+# Set up fzf keybindings
+# CTRL-R for hist search, CTRL-T to fill in file on CLI, ALT+C (actually only Esc-C works) to change to a subdir
+source <(fzf --zsh)
+
+export RIPGREP_CONFIG_PATH="$HOME/prog/dotfiles/ripgreprc"
+export TEALDEER_CONFIG_DIR="$HOME/prog/dotfiles/tealdeer"
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/ward/.docker/completions $fpath)
+autoload -Uz compinit
+(( ${+_comps[docker]} )) || compinit
+# End of Docker CLI completions
