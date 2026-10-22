@@ -8,6 +8,9 @@
 	logpabs = logp --date=short
 	s = status
 	c = commit -v
+	dt = -c diff.external=difft diff
+	dts = -c diff.external=difft diff --staged
+	ds = -c diff.external=difft show --ext-diff
 	d = diff
 	cdiff = diff --color-words
 	cshow = show --color-words
@@ -16,15 +19,9 @@
 	httpd = webrick
 [core]
 	quotepath = false
-	# Try out https://github.com/dandavison/delta
-	pager = delta
 [interactive]
 	diffFilter = delta --color-only
 
-
-[delta]
-	navigate = true  # use n and N to move between diff sections
-	line-numbers = true
 
 [merge]
 	conflictstyle = diff3
