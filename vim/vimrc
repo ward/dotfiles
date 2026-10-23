@@ -104,6 +104,11 @@ let g:neoformat_basic_format_align = 1
 nnoremap <Leader>= :Neoformat<CR>
 vnoremap <Leader>= :'<,'>Neoformat<CR>
 
+" Format vim markdown tables (but also something like a bunch of assignments
+" if you remember that syntax...). Markdown files key assignment in the
+" markdown block to ensure it matches the right filetype.
+Plug 'junegunn/vim-easy-align'
+
 Plug 'dbeniamine/todo.txt-vim'
 augroup todo_ft_group
   autocmd!
@@ -324,6 +329,10 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
     autocmd FileType markdown setlocal spell spelllang=en_gb
     autocmd FileType markdown setlocal autoindent
+    " Uses vim-easy-align plugin
+    " Aligns markdown tables
+    autocmd FileType markdown xmap <Leader><Bar> :EasyAlign*<Bar><Enter>
+    autocmd FileType markdown nmap <Leader><Bar> mZvip:EasyAlign*<Bar><Enter>`Z
   augroup END
   " I believe the following should technically work on anything that pandoc
   " takes as input.
