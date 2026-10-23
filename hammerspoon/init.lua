@@ -8,9 +8,16 @@ amphetamine = require "amphetamine"
 -- Doing it through standard Mac ways resulted in it not working in Finder.
 -- Instead just making the binding here.
 hs.hotkey.bind({"ctrl", "cmd"}, "T", function()
-  local shell_command = "open -n -a /Applications/Alacritty.app"
+  -- Downside: opens new instances instead of just windows
+  -- local shell_command = "open -n -a /Applications/Alacritty.app"
+  -- Downsides:
+  -- 1. doesnt work if none open. (perhaps check if one is open?)
+  -- 2. does not open focused, so might be behind other window. See
+  --    hs.window.find and hs.window:focus() perhaps.
+  -- local shell_command = "/usr/local/bin/alacritty msg create-window"
+  local shell_command = "osascript -e 'tell application \"iTerm\" to create window with default profile'"
   hs.execute(shell_command)
-  hs.notify.new({title="Launching Alacritty"}):send()
+  hs.notify.new({title="Launching iTerm"}):send()
 end)
 
 hs.hotkey.bind({}, "F19", function()
