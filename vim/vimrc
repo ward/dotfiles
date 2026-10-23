@@ -23,7 +23,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_section_z = "%3l/%L %2v"
 
 " Pressing tab in insert mode triggers various vim built-in completions
-Plug 'ajh17/VimCompletesMe'
+" Last update 30 Dec 2020 (writing this @ 14 Dec 2021), hope it didn't die
+Plug 'ackyshake/VimCompletesMe'
 
 " Creates tags files in memory and uses it to display the structure of your
 " file. Note for LaTeX you will want to make sure you use ctags' HEAD version.
@@ -40,16 +41,6 @@ let g:tagbar_type_markdown = {
     \ "sort" : 0
 \ }
 
-" Asynchronous lint engine
-" Apparently they are an LSP client now too...
-Plug 'dense-analysis/ale'
-" Disable for rust, we use LSP
-let g:ale_linters = {
-      \ 'rust': [],
-      \ 'ocaml': [],
-      \ 'python': [],
-      \}
-
 " Language Server Protocol client
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
@@ -62,36 +53,30 @@ let g:lsp_signs_warning = {'text': '‼'}
 " Debug logging
 " let g:lsp_log_verbose = 1
 " let g:lsp_log_file = expand('~/vim-lsp.log')
-" TODO: Make lsp fill up tags?
-" See: https://github.com/prabirshrestha/vim-lsp/issues/321#issuecomment-473492723
+
 " Set up Rust
-" Be sure to: rustup component add rls rust-analysis rust-src
-if executable('rls')
+" Be sure to: rustup component add rls rust-analysis rust-src " out of date
+" rust-analyzer (put binary in home bin or w/e) seems to be the dev focus by
+" the community.
+if executable('rust-analyzer')
   au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': { server_info->['rustup', 'run', 'stable', 'rls'] },
-        \ 'workspace_config': { 'rust': { 'clippy_preference': 'on' } },
-        \ 'whitelist': ['rust'],
+        \   'name': 'Rust Language Server',
+        \   'cmd': {server_info->['rust-analyzer']},
+        \   'whitelist': ['rust'],
+        \   'initialization_options': {
+        \     'cargo': {
+        \       'loadOutDirsFromCheck': v:true,
+        \     },
+        \     'procMacro': {
+        \       'enable': v:true,
+        \     },
+        \   },
         \ })
   au FileType rust setlocal omnifunc=lsp#complete
-  " Use my tags muscle memory to go to definitions
-  " TODO: C-T does not work since tag stack is not updated.
-  " There does not seem to be a function for pushing on the tag stack.
-  " Update: Seems to be fixed upstream? Need to confirm some more.
+  " Use my tags muscle memory to go to definitions, <C-t> also works
   au FileType rust nnoremap <buffer> <C-]> :LspDefinition<CR>
   " Lets you use K to lookup keyword under cursor
   au FileType rust setlocal keywordprg=:LspHover
-endif
-
-if executable('ocamlmerlin-lsp')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'ocamlmerlin-lsp',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'opam config exec -- ocamlmerlin-lsp']},
-        \ 'whitelist': ['ocaml'],
-        \ })
-  au FileType ocaml nnoremap <buffer> <C-]> :LspDefinition<CR>
-  au FileType ocaml setlocal keywordprg=:LspHover
-  au FileType ocaml setlocal omnifunc=lsp#complete
 endif
 
 if executable('pyls')
@@ -158,8 +143,9 @@ set showcmd
 set ruler
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-" Print line numbers
-set number
+" Show line numbers
+set number " absolute current
+set relativenumber " rest relative
 " Highlight the line where our cursor is
 set cursorline
 " Enable mouse for different modes
@@ -294,6 +280,14 @@ syntax on
 set background=dark
 " Find schemes in /usr/share/vim/vim73/colors/
 colorscheme industry
+" Bad spelling highlighting can be unreadable depending on the location. They
+" do not override the letter colour so a link name in markdown is lightbluish
+" on red and I cannot read it at all.
+" Make it black on a more faded red. Only specifying what I change, rest
+" remains untouched. (e.g., the gui settings which is just a squiggly line)
+highlight SpellBad ctermfg=16 ctermbg=1
+" Grammary mistakes
+highlight SpellLocal ctermfg=16
 " }}}
 
 " Tabs, spacing, wrapping ------------------------------------------------- {{{
@@ -347,6 +341,7 @@ if has("autocmd")
   command PandocToHtml call <SID>pandoc_to_html()
   command PandocToPdf call <SID>pandoc_to_pdf()
   nnoremap <buffer> <Leader>v :call <SID>pandoc_open_last_made()<CR><CR>
+  nnoremap <buffer> <Leader>b :call <SID>pandoc_to_html()<CR><CR>
   " }}}
 
   " Dot ------------------------------------------------------------------ {{{
@@ -364,6 +359,7 @@ if has("autocmd")
     autocmd FileType tex setlocal spell spelllang=en_gb
     autocmd FileType tex setlocal makeprg=latexmk\ %<
     autocmd FileType tex nnoremap <buffer> <LocalLeader>ll :make<CR>
+    autocmd FileType tex nnoremap <buffer> <LocalLeader>v :!open _build/%<.pdf<CR><CR>
     "autocmd FileType tex setlocal foldmethod=marker
   augroup END
   " }}}
