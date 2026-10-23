@@ -83,7 +83,7 @@ alias .....='cd ../../../..'
 alias ,git-update-develop='git fetch origin develop:develop'
 alias ,git-tag='git tag --list -n1 | sort -V'
 
-export PATH="$PATH:/Users/wmuylaert/.local/bin"
+export PATH="/Users/ward/.local/bin:$PATH"
 
 # Set up fzf keybindings
 # CTRL-R for hist search, CTRL-T to fill in file on CLI, ALT+C (actually only Esc-C works) to change to a subdir
