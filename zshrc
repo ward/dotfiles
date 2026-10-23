@@ -61,6 +61,17 @@ zle -N down-line-or-beginning-search
 
 [[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
 [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
+# Above two lines did not work in macOS, do it more crudely
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+# Home and End on macOS also complained
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+# Alt + Left and Alt + Right
+bindkey '^[[1;3D' backward-word
+bindkey '^[[1;3C' forward-word
+# delete button
+bindkey '^[[3~' delete-char
 
 # Digraphs
 autoload insert-composed-char
@@ -73,7 +84,7 @@ bindkey '^Xk' insert-unicode-char
 
 # We totally have colour
 export TERM=xterm-256color
-export EDITOR=vim
+export EDITOR=nvim
 
 # Aliases
 case $(uname) in
@@ -96,11 +107,42 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 # cal defaults to Sunday first day...
 alias cal='ncal'
+function clock() {
+  while true
+  do
+    echo -ne "`date`\r"
+    sleep 0.2
+  done
+}
+function countdown() {
+  sleep $1
+  osascript -e "display notification \"$3\" with title \"$2\""
+}
 
 # View markdown file as a man page
 function mman {
   pandoc -s -t man "$1" | groff -T utf8 -man | ${PAGER:-less}
 }
+
+function macos-last-download-show() {
+  local number_of_lines=10
+  if [[ "$1" =~ ^[0-9]+$ ]]; then
+    number_of_lines=$1
+  fi
+  ls -t -A ~/Downloads/ | head -n $number_of_lines | nl
+}
+function macos-last-download-move() {
+  # One based!
+  local nth=1
+  if [[ "$1" =~ ^[0-9]+$ ]]; then
+    nth=$1
+  fi
+  # TODO: Keep getting error "No such file or directory" even after
+  # simplifying the filename.
+  mv -v "~/Downloads/$(ls -t -A ~/Downloads/ | head -n $nth | tail -n 1)" "$(pwd)"
+}
+alias last-download-show=macos-last-download-show
+alias last-download-move=macos-last-download-move
 
 case $(uname) in
   Linux)
@@ -122,16 +164,11 @@ esac
 # become all cluttered.
 alias wget-books='wget --recursive --no-clobber --no-parent --accept epub,mobi,pdf,tmp,cbr,cbz --reject index.html.tmp'
 
+alias pprint-path='echo "${PATH//:/\n}"'
+
 # Ensure the encrypted home directory is also searched
 # Be sure to run ~/bin/myupdate.sh (or cron it)
 export LOCATE_PATH=$HOME/.local/share/mlocate.db
-
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
 
 # Notify if a reboot is required
 if [ -f /var/run/reboot-required ]; then
@@ -147,14 +184,21 @@ if [ -d "$HOME/.rbenv" ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
   rbenv-update() {
-    local current=$(pwd)
-    cd $HOME/.rbenv
-    echo "Running git pull in $(pwd)"
-    git pull
-    cd plugins/ruby-build
-    echo "Running git pull in $(pwd)"
-    git pull
-    cd $current
+    case $(uname) in
+      Linux)
+        local current=$(pwd)
+        cd $HOME/.rbenv
+        echo "Running git pull in $(pwd)"
+        git pull
+        cd plugins/ruby-build
+        echo "Running git pull in $(pwd)"
+        git pull
+        cd $current
+        ;;
+      Darwin)
+        echo "Use Homebrew to keep rbenv up to date."
+        ;;
+    esac
   }
 fi
 
@@ -180,15 +224,17 @@ if [ -d "$HOME/.cargo/bin" ]; then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-# Anaconda python
-if [ -d "$HOME/.anaconda3/bin" ]; then
-  export PATH="$HOME/.anaconda3/bin:$PATH"
+# Go
+if [ -d "$HOME/go/bin" ]; then
+  export PATH="$HOME/go/bin:$PATH"
 fi
 
+# FZF setting up
 if [ -x "$(command -v fzf)" ]; then
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-  alias fzf='fzf --bind "ctrl-o:execute(xdg-open {}&)"'
+  export FZF_DEFAULT_COMMAND="fd --type f"
+  alias fzf='fzf --bind "ctrl-o:execute(open {}&)"'
   function fzfd() {
     local dir
     dir=$(/usr/bin/find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
@@ -196,4 +242,21 @@ if [ -x "$(command -v fzf)" ]; then
   export FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git"
 fi
 
-export RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
+# Ripgrep
+if [ -x "$(command -v rg)" ]; then
+  export RIPGREP_CONFIG_PATH="$HOME/.dotfiles/ripgreprc"
+fi
+
+# Stop homebrew from running `update` when installing or whatever
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+# gpg signing of commits seemed to error otherwise (just in tmux?)
+export GPG_TTY=$(tty)
+
+# jenv.be, github.com/jenv/jenv
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+# Maven
+if [ -d "$HOME/bin/apache-maven-3.6.3/bin" ]; then
+  export PATH="$HOME/bin/apache-maven-3.6.3/bin:$PATH"
+fi
