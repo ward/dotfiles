@@ -42,7 +42,7 @@ prompt_my_clint_setup () {
 
   # p_userpwd="$pc['<']%F{$pcc[3]}%n@%m$p_win%F{$pcc[5]}:%F{$pcc[4]}%~$pc['>']"
   p_userpwd="%F{$pcc[3]}%n@%m$p_win%F{$pcc[5]}%f · %F{$pcc[4]}%~"
-  # Version control
+  # Version control from vcs_info through psvar (see precmd hook)
   local p_vcs="%f%(2v.%2v .)"
 
   # zsh or if nested shell: zsh/N. Followed by history event number
@@ -63,6 +63,7 @@ $p_rc$p_vcs$p_end"
   add-zsh-hook precmd prompt_my_clint_precmd
 }
 
+# precmd hook, runs before each prompt
 prompt_my_clint_precmd () {
   setopt noxtrace noksharrays localoptions
   local exitstatus=$?
@@ -74,6 +75,11 @@ prompt_my_clint_precmd () {
 
   [[ -o interactive ]] && jobs -l
 
+  # Gets version control info (e.g. Git). If a value is found, add it on index
+  # 2 in the prompt array psvar. Then within the prompt, the magic string %2v
+  # gets the second element of this array.
+  # See `man zshcontrib`, go to vcs_info section, to learn more about
+  # formatting of it.
   vcs_info
   [[ -n $vcs_info_msg_0_ ]] && psvar[2]="$vcs_info_msg_0_"
 }
