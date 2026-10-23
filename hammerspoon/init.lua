@@ -20,9 +20,10 @@ hs.hotkey.bind({"ctrl", "cmd"}, "T", function()
   hs.notify.new({title="Launching iTerm"}):send()
 end)
 
-hs.hotkey.bind({}, "F19", function()
+hs.hotkey.bind({"ctrl", "cmd", "option"}, "N", function()
   -- Perhaps use hs.sound instead?
-  local shell_command = "/usr/bin/afplay /Users/wardmuylaert/Library/Mobile\\ Documents/com~apple~QuickTimePlayerX/Documents/gezondheid.m4a"
+  -- TODO: Unmute if muted, remute afterwards?
+  local shell_command = "/usr/bin/afplay --volume 100 /Users/wardmuylaert/Library/Mobile\\ Documents/com~apple~QuickTimePlayerX/Documents/gezondheid.m4a"
   hs.execute(shell_command)
 end)
 
