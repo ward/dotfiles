@@ -26,39 +26,53 @@ hs.hotkey.bind({}, "F19", function()
   hs.execute(shell_command)
 end)
 
-hs.hotkey.bind({}, "F18", function()
-  local shell_command = "open /Users/wardmuylaert/OneDrive\\ -\\ Vrije\\ Universiteit\\ Brussel/timetracking.tsv"
-  hs.execute(shell_command)
-end)
+-- hs.hotkey.bind({}, "F16", function()
+--   if hs.spotify.isRunning() then
+--     hs.spotify.playpause()
+--     hs.spotify.displayCurrentTrack()
+--   end
+-- end)
 
-hs.hotkey.bind({}, "F17", function()
-  local shell_command = "open /Users/wardmuylaert/OneDrive/todo.txt"
-  hs.execute(shell_command)
-end)
+function displayCurrentSpotifyTrack(stopping)
+	-- There is hs.spotify.displayCurrentTrack, but I wanted to add some extra text
+	-- Just copying their implementation with adjustments
+	local artist = hs.spotify.getCurrentArtist() or "Unknown artist"
+	local album  = hs.spotify.getCurrentAlbum() or "Unknown album"
+	local track  = hs.spotify.getCurrentTrack() or "Unknown track"
+	local playpausemsg = "Playing"
+	if stopping then
+		playpausemsg = "Pausing"
+	end
+	local msg = playpausemsg .. "\ntrack: " .. track .."\nalbum: ".. album .."\nartist: ".. artist
+	local duration = 3
+	hs.alert.show(msg, duration)
+end
 
-hs.hotkey.bind({}, "F16", function()
+hs.hotkey.bind({"ctrl", "cmd"}, "P", function()
   if hs.spotify.isRunning() then
+    local stopping = hs.spotify.isPlaying()
     hs.spotify.playpause()
-    hs.spotify.displayCurrentTrack()
+    displayCurrentSpotifyTrack(stopping)
   end
 end)
 
 -- Intercept press on PLAY button
-tap = hs.eventtap.new({hs.eventtap.event.types.NSSystemDefined}, function(event)
-  local sys_key_event = event:systemKey()
-  -- When I want to add Back/forward, they event keys are: REWIND and FAST
-  if sys_key_event and sys_key_event.key == "PLAY" then
-    -- local blab = hs.application.find(20488):bundleID()
-    -- hs.alert.show(blab)
-    -- Only if Quod Libet is running do we do something special
-    if hs.application.get("io.github.quodlibet.QuodLibet") then
-      if sys_key_event.down then
-        hs.execute("/Applications/QuodLibet.app/Contents/MacOS/quodlibet --play-pause")
-        hs.alert.show("Toggled play-pause of Quod Libet.")
-      end
-      return true -- Eat event
-    end
-  end
-  return false -- Propagate event
-end)
-tap:start()
+-- Don't think this is activated since installing USB Overdrive.
+-- tap = hs.eventtap.new({hs.eventtap.event.types.NSSystemDefined}, function(event)
+--   local sys_key_event = event:systemKey()
+--   -- When I want to add Back/forward, they event keys are: REWIND and FAST
+--   if sys_key_event and sys_key_event.key == "PLAY" then
+--     -- local blab = hs.application.find(20488):bundleID()
+--     -- hs.alert.show(blab)
+--     -- Only if Quod Libet is running do we do something special
+--     if hs.application.get("io.github.quodlibet.QuodLibet") then
+--       if sys_key_event.down then
+--         hs.execute("/Applications/QuodLibet.app/Contents/MacOS/quodlibet --play-pause")
+--         hs.alert.show("Toggled play-pause of Quod Libet.")
+--       end
+--       return true -- Eat event
+--     end
+--   end
+--   return false -- Propagate event
+-- end)
+-- tap:start()
