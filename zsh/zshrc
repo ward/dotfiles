@@ -144,4 +144,3 @@ if [ -x "$(command -v fzf)" ]; then
 fi
 
 export RIPGREP_CONFIG_PATH="$HOME/prog/dotfiles/ripgreprc"
-export TEALDEER_CONFIG_DIR="$HOME/prog/dotfiles/tealdeer"
